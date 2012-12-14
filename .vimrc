@@ -4,6 +4,11 @@ set nocompatible
 filetype off
 
 syntax on "シンタックスハイライトを有効にする
+highlight StatusLine ctermfg=black ctermbg=grey
+highlight CursorLine ctermfg=none ctermbg=darkgray cterm=none
+highlight MatchParen ctermfg=none ctermbg=darkgray
+highlight Comment ctermfg=DarkGreen ctermbg=NONE
+highlight Directory ctermfg=DarkGreen ctermbg=NONE
 set nobackup "バックアップファイルを作らない設定にする
 set encoding=utf-8 "デフォルトの文字コード
 set fileencoding=utf-8
@@ -56,7 +61,7 @@ set listchars=tab:>-,trail:-,nbsp:%,extends:>,precedes:<
 
 " Vundle を初期化して
 " Vundle 自身も Vundle で管理
-set rtp+=~/.vim/vimfiles/vundle.git/
+set rtp+=~/dotfiles/.vim/vundle.git/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
@@ -137,6 +142,8 @@ elseif has('win32')
   let g:vimproc_dll_path = $HOME . '.vim/bundle/vimproc/autoload/vimproc_win32.dll'
 elseif has('win64')
   let g:vimproc_dll_path = $HOME . '.vim/bundle/vimproc/autoload/vimproc_win64.dll'
+elseif has('win64')
+  let g:vimproc_dll_path = $HOME . '.vim/bundle/vimproc/autoload/vimproc_win64.dll'
 endif
 
 "RSpec対応
@@ -214,3 +221,18 @@ inoremap <expr><C-g> neocomplcache#undo_completion()
 inoremap <expr><C-l> neocomplcache#complete_common_string()
 " nerdtree
 nmap <Leader>n :NERDTreeToggle<CR>
+
+" タブ関連のキーマッピング
+nnoremap [TABCMD]  <nop>
+nmap     <leader>t [TABCMD]
+
+nnoremap <silent> [TABCMD]f :<c-u>tabfirst<cr>
+nnoremap <silent> [TABCMD]l :<c-u>tablast<cr>
+nnoremap <silent> [TABCMD]n :<c-u>tabnext<cr>
+nnoremap <silent> [TABCMD]N :<c-u>tabNext<cr>
+nnoremap <silent> [TABCMD]p :<c-u>tabprevious<cr>
+nnoremap <silent> [TABCMD]e :<c-u>tabedit<cr>
+nnoremap <silent> [TABCMD]c :<c-u>tabclose<cr>
+nnoremap <silent> [TABCMD]o :<c-u>tabonly<cr>
+nnoremap <silent> [TABCMD]s :<c-u>tabs<cr>
+
