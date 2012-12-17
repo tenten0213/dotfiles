@@ -4,11 +4,6 @@ set nocompatible
 filetype off
 
 syntax on "シンタックスハイライトを有効にする
-highlight StatusLine ctermfg=black ctermbg=grey
-highlight CursorLine ctermfg=none ctermbg=darkgray cterm=none
-highlight MatchParen ctermfg=none ctermbg=darkgray
-highlight Comment ctermfg=DarkGreen ctermbg=NONE
-highlight Directory ctermfg=DarkGreen ctermbg=NONE
 set nobackup "バックアップファイルを作らない設定にする
 set encoding=utf-8 "デフォルトの文字コード
 set fileencoding=utf-8
@@ -123,6 +118,12 @@ Bundle "git://git.wincent.com/command-t.git"
 Bundle 'thinca/vim-ref'
 Bundle 'taichouchou2/vim-ref-ri'
 Bundle 'taq/vim-rspec'
+
+" カラースキーマ
+Bundle 'ujihisa/unite-colorscheme'
+Bundle 'nanotech/jellybeans.vim'
+Bundle 'tomasr/molokai'
+colorscheme desert
 
 " ファイル形式検出、プラグイン、インデントを ON
 :set shiftwidth=2

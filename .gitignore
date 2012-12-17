@@ -1,0 +1,5 @@
+*.swp
+*.swo
+*.vim
+files.list
+tags
