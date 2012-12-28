@@ -52,12 +52,17 @@ au WinEnter * let w:m3 = matchadd("ZenkakuSpace", '　')
 set list
 set listchars=tab:>-,trail:-,nbsp:%,extends:>,precedes:<
 
-" CTRL-hjklでウィンドウ移動したいなー
+" ヤンクした値を連続でペーストする設定
+vnoremap <silent> <C-p> "0p<CR>
 
 " Vundle を初期化して
 " Vundle 自身も Vundle で管理
 set rtp+=~/dotfiles/.vim/vundle.git/
 call vundle#rc()
+
+Bundle 'Source-Explorer-srcexpl.vim'
+Bundle 'taglist.vim'
+Bundle 'trinity.vim'
 
 Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-endwise.git'
