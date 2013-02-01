@@ -73,8 +73,6 @@ Bundle 'mattn/webapi-vim'
 Bundle 'nathanaelkane/vim-indent-guides'
 "Bundle 'tell-k/vim-browsereload-mac' "vimからブラウザをリロードする
 
-" unite使うからコメントアウト
-" Bundle 'FuzzyFinder'
 Bundle "Shougo/neocomplcache"
 Bundle "Shougo/neosnippet"
 Bundle "Shougo/unite.vim"
@@ -116,6 +114,12 @@ Bundle 'mattn/zencoding-vim'
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'taichouchou2/html5.vim'
 
+" Less
+Bundle 'groenewege/vim-less'
+
+"scss
+Bundle 'cakebaker/scss-syntax.vim'
+
 " git
 Bundle "git://git.wincent.com/command-t.git"
 Bundle "tpope/vim-fugitive"
@@ -156,18 +160,20 @@ endif
 "RSpec対応
 let g:quickrun_config = {}
 let g:quickrun_config['ruby.rspec'] = {'command': "rspec"}
+"let g:quickrun_config['ruby.rspec'] = { 'command': 'rspec', 'cmdopt': 'bundle exec', 'exec': '%o %c %s' }
+"
 augroup RSpec
   autocmd!
   autocmd BufWinEnter,BufNewFile *_spec.rb set filetype=ruby.rspec
-augroup END 
+augroup END
 
-function! SetUpRubySetting()
-  setlocal completefunc=RSenseCompleteFunction
-  nmap <buffer>tj :RSenseJumpToDefinition<CR>
-  nmap <buffer>tk :RSenseWhereIs<CR>
-  nmap <buffer>td :RSenseTypeHelp<CR>
-endfunction
-autocmd FileType ruby,eruby,ruby.rspec call SetUpRubySetting()
+"function! SetUpRubySetting()
+"  setlocal completefunc=RSenseCompleteFunction
+"  nmap <buffer>tj :RSenseJumpToDefinition<CR>
+"  nmap <buffer>tk :RSenseWhereIs<CR>
+"  nmap <buffer>td :RSenseTypeHelp<CR>
+"endfunction
+"autocmd FileType ruby,eruby,ruby.rspec call SetUpRubySetting()
 
 " CoffeeScriptの設定
 let g:quickrun_config = {}
@@ -203,37 +209,6 @@ if !exists('g:neocomplcache_omni_patterns')
 endif
 let g:neocomplcache_omni_patterns.ruby       = '[^. *\t]\.\w*\|\h\w*::'
 
-
-" 入力モードで開始
-" let g:unite_enable_start_insert=1
-"mru,reg,buf
-noremap :um :<C-u>Unite file_mru -buffer-name=file_mru<CR>
-noremap :ur :<C-u>Unite register -buffer-name=register<CR>
-noremap :ub :<C-u>Unite buffer -buffer-name=buffer<CR>
-
-
-"file current_dir
-noremap :ufc :<C-u>Unite file -buffer-name=file<CR>
-noremap :ufcr :<C-u>Unite file_rec -buffer-name=file_rec<CR>
-
-"file file_current_dir
-noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
-noremap :uffr :<C-u>UniteWithBufferDir file_rec -buffer-name=file_rec<CR>
-" c-jはescとする
-au FileType unite nnoremap <silent> <buffer> <c-j> <esc><CR>
-
-" ESCキーを2回押すと終了する
-au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
-au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
-
-" 括弧とかダブルコート入力時に←に戻る
-imap {} {}<Left>
-imap [] []<Left>
-imap () ()<Left>
-imap "" ""<Left>
-imap '' ''<Left>
-imap <> <><Left>
-
 " neocomplcache
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_max_list = 30
@@ -248,6 +223,7 @@ imap <C-k> <Plug>(neocomplcache_snippets_expand)
 smap <C-k> <Plug>(neocomplcache_snippets_expand)
 inoremap <expr><C-g> neocomplcache#undo_completion()
 inoremap <expr><C-l> neocomplcache#complete_common_string()
+
 " nerdtree
 nmap <Leader>n :NERDTreeToggle<CR>
 
@@ -264,4 +240,33 @@ nnoremap <silent> [TABCMD]e :<c-u>tabedit<cr>
 nnoremap <silent> [TABCMD]c :<c-u>tabclose<cr>
 nnoremap <silent> [TABCMD]o :<c-u>tabonly<cr>
 nnoremap <silent> [TABCMD]s :<c-u>tabs<cr>
+te.vim
+""""""""""""""""""""""""""""""""""""""""""""""""""
+" 入力モードで開始する
+let g:unite_enable_start_insert = 1
 
+nnoremap    [unite]   <Nop>
+nmap    f [unite]
+
+" 分割しないでuniteのbufferを表示する
+nnoremap [unite]u  :<C-u>Unite -no-split<Space>
+
+" 全部乗せ
+nnoremap <silent> [unite]a  :<C-u>UniteWithCurrentDir -no-split -buffer-name=files buffer file_mru bookmark file<CR>
+" ファイル一覧
+nnoremap <silent> [unite]f  :<C-u>Unite -no-split -buffer-name=files file<CR>
+" バッファ一覧
+nnoremap <silent> [unite]j  :<C-u>Unite -no-split buffer<CR>
+" 常用セット
+nnoremap <silent> [unite]u  :<C-u>Unite -no-split buffer file_mru<CR>
+" 最近使用したファイル一覧
+nnoremap <silent> [unite]m  :<C-u>Unite -no-split file_mru<CR>
+" 現在のバッファのカレントディレクトリからファイル一覧
+nnoremap <silent> [unite]d  :<C-u>UniteWithBufferDir -no-split file<CR>
+
+" Ctrl + JはESCとする                                                                                                                                                                                                                        
+au FileType unite inoremap <silent> <buffer> <C-j> <ESC>
+
+" ESCキーで終了する
+au FileType unite nmap <silent> <buffer> <C-j> <Plug>(unite_exit)
+au FileType unite nmap <silent> <buffer> <ESC> <Plug>(unite_exit)
