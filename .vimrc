@@ -1,7 +1,16 @@
-" viとのをOFF
+" viとの互換をOFF
 set nocompatible
 " ファイル形式の検出を無効にする
 filetype off
+" Vundle を初期化してVundle 自身も Vundle で管理
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+Bundle 'gmarik/vundle'
+
+" Vundle を初期化して
+" Vundle 自身も Vundle で管理
+" set rtp+=~/dotfiles/.vim/vundle.git/
+" call vundle#rc()
 
 syntax on "シンタックスハイライトを有効にする
 set nobackup "バックアップファイルを作らない設定にする
@@ -55,10 +64,6 @@ set listchars=tab:>-,trail:-,nbsp:%,extends:>,precedes:<
 " ヤンクした値を連続でペーストする設定
 vnoremap <silent> <C-p> "0p<CR>
 
-" Vundle を初期化して
-" Vundle 自身も Vundle で管理
-set rtp+=~/dotfiles/.vim/vundle.git/
-call vundle#rc()
 
 Bundle 'Source-Explorer-srcexpl.vim'
 Bundle 'taglist.vim'
@@ -83,7 +88,7 @@ Bundle "Shougo/vimshell"
 
 Bundle "taichouchou2/vim-rsense"
 Bundle "opsplorer"
-Bundle "scrooloose/nerdtree"
+"Bundle "scrooloose/nerdtree"
 Bundle "reinh/vim-makegreen"
 
 " Ruby
@@ -100,7 +105,7 @@ Bundle 'tpope/vim-rails'
 Bundle "rails.vim"
 Bundle 'ujihisa/unite-rake'
 Bundle 'basyura/unite-rails'
-Bundle 'vim-scripts/project.vim'
+"Bundle 'vim-scripts/project.vim'
 
 " js
 Bundle 'JavaScript-syntax'
@@ -225,7 +230,7 @@ inoremap <expr><C-g> neocomplcache#undo_completion()
 inoremap <expr><C-l> neocomplcache#complete_common_string()
 
 " nerdtree
-nmap <Leader>n :NERDTreeToggle<CR>
+" nmap <Leader>n :NERDTreeToggle<CR>
 
 " タブ関連のキーマッピング
 nnoremap [TABCMD]  <nop>
@@ -240,7 +245,6 @@ nnoremap <silent> [TABCMD]e :<c-u>tabedit<cr>
 nnoremap <silent> [TABCMD]c :<c-u>tabclose<cr>
 nnoremap <silent> [TABCMD]o :<c-u>tabonly<cr>
 nnoremap <silent> [TABCMD]s :<c-u>tabs<cr>
-te.vim
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " 入力モードで開始する
 let g:unite_enable_start_insert = 1
