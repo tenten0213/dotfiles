@@ -1,5 +1,7 @@
 " viとの互換をOFF
 set nocompatible
+" swpファイルを作成しない
+set noswapfile
 " ファイル形式の検出を無効にする
 filetype off
 " Vundle を初期化してVundle 自身も Vundle で管理
@@ -139,6 +141,12 @@ Bundle 'cakebaker/scss-syntax.vim'
 " git
 Bundle "git://git.wincent.com/command-t.git"
 Bundle "tpope/vim-fugitive"
+nnoremap <silent> <Space>ga :Gwrite<CR>
+nnoremap <silent> <Space>gc :Gcommit<CR>
+nnoremap <silent> <Space>gs :Gstatus<CR>
+nnoremap <silent> <Space>gd :Gdiff<CR>
+nnoremap <silent> <Space>gb :Gblame<CR>
+nnoremap <silent> <Space>gl :GlLog<CR>
 
 " markdown
 Bundle 'plasticboy/vim-markdown'
@@ -180,6 +188,10 @@ let g:rsenseHome = expand('~/.vim/ref/rsense-0.3')
 let g:quickrun_config = {}
 let g:quickrun_config['ruby.rspec'] = {'command': "rspec"}
 let g:quickrun_config['ruby.rspec'] = { 'command': 'rspec', 'cmdopt': 'bundle exec', 'exec': '%o %c %s' }
+
+" RSpecコマンド
+nnoremap <silent> ,rs :RunSpec<CR>
+nnoremap <silent> ,rl :RunSpecLine<CR>
 
 augroup RSpec
   autocmd!
@@ -243,6 +255,8 @@ imap <C-k> <Plug>(neocomplcache_snippets_expand)
 smap <C-k> <Plug>(neocomplcache_snippets_expand)
 inoremap <expr><C-g> neocomplcache#undo_completion()
 inoremap <expr><C-l> neocomplcache#complete_common_string()
+
+
 
 " nerdtree
 " nmap <Leader>n :NERDTreeToggle<CR>
