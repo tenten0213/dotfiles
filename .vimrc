@@ -7,18 +7,13 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
 
-" Vundle を初期化して
-" Vundle 自身も Vundle で管理
-" set rtp+=~/dotfiles/.vim/vundle.git/
-" call vundle#rc()
-
 syntax on "シンタックスハイライトを有効にする
 set nobackup "バックアップファイルを作らない設定にする
 set encoding=utf-8 "デフォルトの文字コード
 set fileencoding=utf-8
 set fileencodings=iso-2022-jp,euc-jp,utf-8,ucs-2,cp932,sjis "自動判別に使用する文字コード 
 set autoindent "オートインデントする
-" タブ幅の設定
+"" タブ幅の設定
 set expandtab
 set tabstop=2
 set softtabstop=2
@@ -32,15 +27,16 @@ set title "編集中のファイル名を表示する
 set ruler "ルーラーの表示する
 " カーソル行をハイライト
 set cursorline
-" カレントウィンドウにのみ罫線を引く
-augroup cch
-autocmd! cch
-autocmd WinLeave * set nocursorline
-autocmd WinEnter,BufRead * set cursorline
-augroup END
 :hi clear CursorLine
 :hi CursorLine gui=underline
 highlight CursorLine ctermbg=black guibg=black
+
+" カレントウィンドウにのみ罫線を引く
+augroup cch
+  autocmd! cch
+  autocmd WinLeave * set nocursorline
+  autocmd WinEnter,BufRead * set cursorline
+augroup END
 
 "行末の空白文字を可視化
 highlight WhitespaceEOL cterm=underline ctermbg=red guibg=#FF0000
@@ -64,41 +60,57 @@ set listchars=tab:>-,trail:-,nbsp:%,extends:>,precedes:<
 " ヤンクした値を連続でペーストする設定
 vnoremap <silent> <C-p> "0p<CR>
 
+" ライブラリ管理
+Bundle 'gmarik/vundle'
 
+" tagsを利用したソースコード閲覧・移動補助機能
 Bundle 'Source-Explorer-srcexpl.vim'
 Bundle 'taglist.vim'
 Bundle 'trinity.vim'
 
-Bundle 'gmarik/vundle'
+" endなどを自動挿入
 Bundle 'tpope/vim-endwise.git'
-Bundle 'vim-scripts/dbext.vim'
+" vimからdb弄る(使ってないからコメントアウト)
+ Bundle 'vim-scripts/dbext.vim'
+" ブラウザで開く
 Bundle 'open-browser.vim'
+" ググる
+nnoremap <Leader>g :<C-u>OpenBrowserSearch<Space><C-r><C-w><Enter>
+" httpでGetとか出来るらしい。どれか依存してる？
 Bundle 'mattn/webapi-vim'
+
 " indentの深さに色を付ける
 Bundle 'nathanaelkane/vim-indent-guides'
 "Bundle 'tell-k/vim-browsereload-mac' "vimからブラウザをリロードする
 
+" コード補完
 Bundle "Shougo/neocomplcache"
 Bundle "Shougo/neosnippet"
-Bundle "Shougo/unite.vim"
-Bundle 'thinca/vim-quickrun'
+Bundle "taichouchou2/vim-rsense"
 
-Bundle "Shougo/vimproc"
+" unite
+Bundle "Shougo/unite.vim"
+Bundle 'ujihisa/unite-colorscheme'
+Bundle 'h1mesuke/unite-outline'
+
+" vimfiler
+Bundle "Shougo/vimfiler"
+
+" vimからなにかを実行するのに利用
+Bundle 'thinca/vim-quickrun'
+"Bundle "Shougo/vimproc"
 Bundle "Shougo/vimshell"
 
-Bundle "taichouchou2/vim-rsense"
-Bundle "opsplorer"
-"Bundle "scrooloose/nerdtree"
-Bundle "reinh/vim-makegreen"
-
-" Ruby
-Bundle 'vim-ruby/vim-ruby'
-Bundle 'ruby-matchit'
-Bundle 'tpope/vim-cucumber'
+" ファイルツリー表示
+Bundle "scrooloose/nerdtree"
 
 " コメント
-Bundle 'tomtom/tcomment_vim'
-Bundle 'taichouchou2/surround.vim'
+Bundle 'taichouchou2/surround'
+
+" Ruby
+Bundle 'ruby-matchit'
+Bundle 'tpope/vim-cucumber'
+Bundle "reinh/vim-makegreen"
 
 " railsサポート
 Bundle 'tpope/vim-rails'
@@ -112,7 +124,6 @@ Bundle 'JavaScript-syntax'
 Bundle 'itspriddle/vim-javascript-indent'
 " Bundle 'taichouchou2/vim-javascript' " jQuery syntax追加
 Bundle 'kchmck/vim-coffee-script'
-
 
 " CSS
 Bundle 'mattn/zencoding-vim'
@@ -129,6 +140,9 @@ Bundle 'cakebaker/scss-syntax.vim'
 Bundle "git://git.wincent.com/command-t.git"
 Bundle "tpope/vim-fugitive"
 
+" markdown
+Bundle 'plasticboy/vim-markdown'
+
 " reference環境
 Bundle 'thinca/vim-ref'
 Bundle 'taichouchou2/vim-ref-ri'
@@ -144,7 +158,7 @@ colorscheme desert
 :set shiftwidth=2
 filetype plugin indent on
 
-source $VIMRUNTIME/macros/matchit.vim
+"source $VIMRUNTIME/macros/matchit.vim
 filetype plugin on
 
 "rsenseの設定
@@ -152,33 +166,33 @@ let g:rsenseUseOmniFunc = 1
 let g:rsenseHome = expand('~/.vim/ref/rsense-0.3')
 
 "vimshellの設定
-if has('mac')
-  let g:vimproc_dll_path = $VIMRUNTIME . '/autoload/vimproc_mac.so'
-elseif has('win32')
-  let g:vimproc_dll_path = $HOME . '.vim/bundle/vimproc/autoload/vimproc_win32.dll'
-elseif has('win64')
-  let g:vimproc_dll_path = $HOME . '.vim/bundle/vimproc/autoload/vimproc_win64.dll'
-elseif has('win64')
-  let g:vimproc_dll_path = $HOME . '.vim/bundle/vimproc/autoload/vimproc_win64.dll'
-endif
+""if has('mac')
+""  let g:vimproc_dll_path = $VIMRUNTIME . '/autoload/vimproc_mac.so'
+""elseif has('win32')
+""  let g:vimproc_dll_path = $HOME . '.vim/bundle/vimproc/autoload/vimproc_win32.dll'
+""elseif has('win64')
+""  let g:vimproc_dll_path = $HOME . '.vim/bundle/vimproc/autoload/vimproc_win64.dll'
+""elseif has('win64')
+""  let g:vimproc_dll_path = $HOME . '.vim/bundle/vimproc/autoload/vimproc_win64.dll'
+""endif
 
 "RSpec対応
 let g:quickrun_config = {}
 let g:quickrun_config['ruby.rspec'] = {'command': "rspec"}
-"let g:quickrun_config['ruby.rspec'] = { 'command': 'rspec', 'cmdopt': 'bundle exec', 'exec': '%o %c %s' }
-"
+let g:quickrun_config['ruby.rspec'] = { 'command': 'rspec', 'cmdopt': 'bundle exec', 'exec': '%o %c %s' }
+
 augroup RSpec
   autocmd!
   autocmd BufWinEnter,BufNewFile *_spec.rb set filetype=ruby.rspec
 augroup END
 
-"function! SetUpRubySetting()
-"  setlocal completefunc=RSenseCompleteFunction
-"  nmap <buffer>tj :RSenseJumpToDefinition<CR>
-"  nmap <buffer>tk :RSenseWhereIs<CR>
-"  nmap <buffer>td :RSenseTypeHelp<CR>
-"endfunction
-"autocmd FileType ruby,eruby,ruby.rspec call SetUpRubySetting()
+function! SetUpRubySetting()
+  setlocal completefunc=RSenseCompleteFunction
+  nmap <buffer>tj :RSenseJumpToDefinition<CR>
+  nmap <buffer>tk :RSenseWhereIs<CR>
+  nmap <buffer>td :RSenseTypeHelp<CR>
+endfunction
+autocmd FileType ruby,eruby,ruby.rspec call SetUpRubySetting()
 
 " CoffeeScriptの設定
 let g:quickrun_config = {}
@@ -189,6 +203,7 @@ au BufRead,BufNewFile,BufReadPre *.coffee   set filetype=coffee
 autocmd FileType coffee     setlocal sw=2 sts=2 ts=2 et
 " 保存時にコンパイル
 autocmd BufWritePost *.coffee silent CoffeeMake! -cb | cwindow | redraw!
+
 " インデントの深さに色を付ける
 let g:indent_guides_start_level=2
 let g:indent_guides_auto_colors=0
@@ -212,9 +227,9 @@ let g:neocomplcache_omni_functions.ruby = 'RSenseCompleteFunction'
 if !exists('g:neocomplcache_omni_patterns')
   let g:neocomplcache_omni_patterns = {}
 endif
-let g:neocomplcache_omni_patterns.ruby       = '[^. *\t]\.\w*\|\h\w*::'
+let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 
-" neocomplcache
+" neocomplcacheの設定
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_max_list = 30
 let g:neocomplcache_auto_completion_start_length = 2
@@ -232,6 +247,16 @@ inoremap <expr><C-l> neocomplcache#complete_common_string()
 " nerdtree
 " nmap <Leader>n :NERDTreeToggle<CR>
 
+"%の移動をtabでも可能に。
+" tab means %
+nnoremap <tab> %
+
+"splitの移動を簡単に。ctrl押しながらhjkl
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
 " タブ関連のキーマッピング
 nnoremap [TABCMD]  <nop>
 nmap     <leader>t [TABCMD]
@@ -245,6 +270,7 @@ nnoremap <silent> [TABCMD]e :<c-u>tabedit<cr>
 nnoremap <silent> [TABCMD]c :<c-u>tabclose<cr>
 nnoremap <silent> [TABCMD]o :<c-u>tabonly<cr>
 nnoremap <silent> [TABCMD]s :<c-u>tabs<cr>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " 入力モードで開始する
 let g:unite_enable_start_insert = 1
@@ -268,7 +294,14 @@ nnoremap <silent> [unite]m  :<C-u>Unite -no-split file_mru<CR>
 " 現在のバッファのカレントディレクトリからファイル一覧
 nnoremap <silent> [unite]d  :<C-u>UniteWithBufferDir -no-split file<CR>
 
-" Ctrl + JはESCとする                                                                                                                                                                                                                        
+" ウィンドウを分割して開く
+au FileType unite nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
+au FileType unite inoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
+" ウィンドウを縦に分割して開く
+au FileType unite nnoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
+au FileType unite inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
+
+" Ctrl + JはESCとする
 au FileType unite inoremap <silent> <buffer> <C-j> <ESC>
 
 " ESCキーで終了する
