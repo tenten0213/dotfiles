@@ -1,19 +1,13 @@
-" viとの互換をOFF
-set nocompatible
-" swpファイルを作成しない
-set noswapfile
-" ファイル形式の検出を無効にする
-filetype off
-" Vundle を初期化してVundle 自身も Vundle で管理
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Bundle 'gmarik/vundle'
-
-syntax on "シンタックスハイライトを有効にする
+set nocompatible " viとの互換をOFF
+set noswapfile " swpファイルを作成しない
 set nobackup "バックアップファイルを作らない設定にする
+set autoread "他で書き換えられたら読み込み直す
+set formatoptions=lmoq " テキスト整形オプション，マルチバイト系を追加
+set vb t_vb= " ビープをならさない
+set whichwrap=b,s,h,l,<,>,[,]    " カーソルを行頭、行末で止まらないようにする
+filetype off " ファイル形式の検出を無効にする
+syntax on "シンタックスハイライトを有効にする
 set encoding=utf-8 "デフォルトの文字コード
-set fileencoding=utf-8
-set fileencodings=iso-2022-jp,euc-jp,utf-8,ucs-2,cp932,sjis "自動判別に使用する文字コード 
 set autoindent "オートインデントする
 "" タブ幅の設定
 set expandtab
@@ -27,11 +21,72 @@ set showmatch "対応する括弧のハイライト表示する
 set showmode "モード表示する
 set title "編集中のファイル名を表示する
 set ruler "ルーラーの表示する
-" カーソル行をハイライト
-set cursorline
+set virtualedit+=block " 矩形選択で自由に移動する
+set cursorline " カーソル行をハイライト
 :hi clear CursorLine
 :hi CursorLine gui=underline
 highlight CursorLine ctermbg=black guibg=black
+
+" ----- Encoding -----
+" via: http://www.kawaz.jp/pukiwiki/?vim#cb691f26
+" 文字コードの自動認識
+if &encoding !=# 'utf-8'
+  set encoding=japan
+  set fileencoding=japan
+endif
+if has('iconv')
+  let s:enc_euc = 'euc-jp'
+  let s:enc_jis = 'iso-2022-jp'
+  " iconvがeucJP-msに対応しているかをチェック
+  if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
+    let s:enc_euc = 'eucjp-ms'
+    let s:enc_jis = 'iso-2022-jp-3'
+  " iconvがJISX0213に対応しているかをチェック
+  elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
+    let s:enc_euc = 'euc-jisx0213'
+    let s:enc_jis = 'iso-2022-jp-3'
+  endif
+  " fileencodingsを構築
+  if &encoding ==# 'utf-8'
+    let s:fileencodings_default = &fileencodings
+    let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
+    let &fileencodings = &fileencodings .','. s:fileencodings_default
+    unlet s:fileencodings_default
+  else
+    let &fileencodings = &fileencodings .','. s:enc_jis
+    set fileencodings+=utf-8,ucs-2le,ucs-2
+    if &encoding =~# '^\(euc-jp\|euc-jisx0213\|eucjp-ms\)$'
+      set fileencodings+=cp932
+      set fileencodings-=euc-jp
+      set fileencodings-=euc-jisx0213
+      set fileencodings-=eucjp-ms
+      let &encoding = s:enc_euc
+      let &fileencoding = s:enc_euc
+    else
+      let &fileencodings = &fileencodings .','. s:enc_euc
+    endif
+  endif
+  " 定数を処分
+  unlet s:enc_euc
+  unlet s:enc_jis
+endif
+" 日本語を含まない場合は fileencoding に encoding を使うようにする
+if has('autocmd')
+  function! AU_ReCheck_FENC()
+    if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
+      let &fileencoding=&encoding
+    endif
+  endfunction
+  autocmd BufReadPost * call AU_ReCheck_FENC()
+endif
+
+" 改行コードの自動認識
+set fileformats=unix,dos,mac
+" □とか○の文字があってもカーソル位置がずれないようにする
+if exists('&ambiwidth')
+  set ambiwidth=double
+endif
+
 
 " カレントウィンドウにのみ罫線を引く
 augroup cch
@@ -61,6 +116,11 @@ set listchars=tab:>-,trail:-,nbsp:%,extends:>,precedes:<
 
 " ヤンクした値を連続でペーストする設定
 vnoremap <silent> <C-p> "0p<CR>
+
+" Vundle を初期化してVundle 自身も Vundle で管理
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+Bundle 'gmarik/vundle'
 
 " ライブラリ管理
 Bundle 'gmarik/vundle'
@@ -100,7 +160,7 @@ Bundle "Shougo/vimfiler"
 
 " vimからなにかを実行するのに利用
 Bundle 'thinca/vim-quickrun'
-"Bundle "Shougo/vimproc"
+Bundle "Shougo/vimproc"
 Bundle "Shougo/vimshell"
 
 " ファイルツリー表示
@@ -141,12 +201,13 @@ Bundle 'cakebaker/scss-syntax.vim'
 " git
 Bundle "git://git.wincent.com/command-t.git"
 Bundle "tpope/vim-fugitive"
-nnoremap <silent> <Space>ga :Gwrite<CR>
-nnoremap <silent> <Space>gc :Gcommit<CR>
-nnoremap <silent> <Space>gs :Gstatus<CR>
-nnoremap <silent> <Space>gd :Gdiff<CR>
-nnoremap <silent> <Space>gb :Gblame<CR>
-nnoremap <silent> <Space>gl :GlLog<CR>
+nnoremap <silent> ,ga :Gwrite<CR>
+nnoremap <silent> ,gc :Gcommit<CR>
+nnoremap <silent> ,gcv :Gcommit-v<CR>
+nnoremap <silent> ,gs :Gstatus<CR>
+nnoremap <silent> ,gd :Gdiff<CR>
+nnoremap <silent> ,gb :Gblame<CR>
+nnoremap <silent> ,gl :Glog<CR>
 
 " markdown
 Bundle 'plasticboy/vim-markdown'
@@ -162,6 +223,23 @@ Bundle 'nanotech/jellybeans.vim'
 Bundle 'tomasr/molokai'
 colorscheme desert
 
+" Twitter
+Bundle 'TwitVim'
+let twitvim_count = 40
+nnoremap ,tt :<C-u>PosttoTwitter<CR> "ツイーヨ
+nnoremap ,tl :<C-u>FriendsTwitter<CR><C-w><C-k> "タイムライン表示
+nnoremap ,tu :<C-u>UserTwitter<CR><C-w><C-k> "自分のつぶやき
+nnoremap ,tr :<C-u>RepliesTwitter<CR><C-w><C-k> "リプ
+nnoremap ,td :<C-u>NextTwitter<CR> "DM
+"Bundle "mattn/streamer-vim"
+"Bundle "basyura/twibill.vim"
+"Bundle "rhysd/unite-twitter.vim"
+
+autocmd FileType twitvim call s:twitvim_my_settings()
+function! s:twitvim_my_settings()
+  set nowrap
+endfunction
+
 " ファイル形式検出、プラグイン、インデントを ON
 :set shiftwidth=2
 filetype plugin indent on
@@ -174,15 +252,15 @@ let g:rsenseUseOmniFunc = 1
 let g:rsenseHome = expand('~/.vim/ref/rsense-0.3')
 
 "vimshellの設定
-""if has('mac')
-""  let g:vimproc_dll_path = $VIMRUNTIME . '/autoload/vimproc_mac.so'
-""elseif has('win32')
-""  let g:vimproc_dll_path = $HOME . '.vim/bundle/vimproc/autoload/vimproc_win32.dll'
-""elseif has('win64')
-""  let g:vimproc_dll_path = $HOME . '.vim/bundle/vimproc/autoload/vimproc_win64.dll'
-""elseif has('win64')
-""  let g:vimproc_dll_path = $HOME . '.vim/bundle/vimproc/autoload/vimproc_win64.dll'
-""endif
+if has('mac')
+  let g:vimproc_dll_path = $VIMRUNTIME . '/autoload/vimproc_mac.so'
+elseif has('win32')
+  let g:vimproc_dll_path = $HOME . '/.vim/bundle/vimproc/autoload/vimproc_win32.dll'
+elseif has('win64')
+  let g:vimproc_dll_path = $HOME . '/.vim/bundle/vimproc/autoload/vimproc_win64.dll'
+else
+  let g:vimproc_dll_path = $HOME . '/.vim/bundle/vimproc/autoload/vimproc_unix.so'
+endif
 
 "RSpec対応
 let g:quickrun_config = {}
