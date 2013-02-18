@@ -166,8 +166,7 @@ Bundle "Shougo/vimshell"
 " ファイルツリー表示
 Bundle "scrooloose/nerdtree"
 
-" コメント
-Bundle 'taichouchou2/surround'
+Bundle 'tpope/vim-surround'
 
 " Ruby
 Bundle 'ruby-matchit'
@@ -183,9 +182,18 @@ Bundle 'basyura/unite-rails'
 
 " js
 Bundle 'JavaScript-syntax'
-Bundle 'itspriddle/vim-javascript-indent'
+" Bundle 'itspriddle/vim-javascript-indent'
+Bundle 'jiangmiao/simple-javascript-indenter'
+Bundle 'teramako/jscomplete-vim'
+" DOMとMozilla関連とES6のメソッドを補完
+let g:jscomplete_use = ['dom', 'moz', 'es6th']
 " Bundle 'taichouchou2/vim-javascript' " jQuery syntax追加
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'jQuery'
+au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
+Bundle 'scrooloose/syntastic'
+" jshintを使ってチェック
+let g:syntastic_javascript_checker = "jshint"
 
 " CSS
 Bundle 'mattn/zencoding-vim'
