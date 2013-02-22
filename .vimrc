@@ -224,7 +224,8 @@ Bundle 'plasticboy/vim-markdown'
 Bundle 'thinca/vim-ref'
 Bundle 'taichouchou2/vim-ref-ri'
 Bundle 'taq/vim-rspec'
-
+" :HttpStatus でHttpStatusを表示
+Bundle 'mattn/httpstatus-vim'
 " カラースキーマ
 Bundle 'ujihisa/unite-colorscheme'
 Bundle 'nanotech/jellybeans.vim'
