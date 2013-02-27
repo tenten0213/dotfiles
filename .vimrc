@@ -402,9 +402,5 @@ au FileType unite inoremap <silent> <buffer> <expr> <C-j> unite#do_action('split
 au FileType unite nnoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
 au FileType unite inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
 
-" Ctrl + JはESCとする
-au FileType unite inoremap <silent> <buffer> <C-j> <ESC>
-
 " ESCキーで終了する
-au FileType unite nmap <silent> <buffer> <C-j> <Plug>(unite_exit)
 au FileType unite nmap <silent> <buffer> <ESC> <Plug>(unite_exit)
