@@ -8,6 +8,7 @@ set whichwrap=b,s,h,l,<,>,[,]    " カーソルを行頭、行末で止まらな
 filetype off " ファイル形式の検出を無効にする
 syntax on "シンタックスハイライトを有効にする
 set encoding=utf-8 "デフォルトの文字コード
+set fileencoding=utf-8 "デフォルトの文字コード
 set autoindent "オートインデントする
 "" タブ幅の設定
 set expandtab
@@ -404,3 +405,9 @@ au FileType unite inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vspli
 
 " ESCキーで終了する
 au FileType unite nmap <silent> <buffer> <ESC> <Plug>(unite_exit)
+" unite.vim上でのキーマッピング
+autocmd FileType unite call s:unite_my_settings()
+function! s:unite_my_settings()
+  " 単語単位からパス単位で削除するように変更
+  imap <buffer> <C-w> <Plug>(unite_delete_backward_path)
+endfunction
