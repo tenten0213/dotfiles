@@ -328,6 +328,17 @@ if !exists('g:neocomplcache_omni_patterns')
 endif
 let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 
+" rails.vim の設定(うまくいってない…)
+autocmd User Rails.controller* Rnavcommand api app/controllers/api -glob=**/* -suffix=_controller.rb
+autocmd User Rails.controller* Rnavcommand tmpl app/controllers/tmpl -glob=**/* -suffix=_controller.rb
+autocmd User Rails Rnavcommand config config   -glob=*.*  -suffix= -default=routes.rb
+autocmd User Rails nmap :<C-u>RScontroller :<C-u>Rcj
+autocmd User Rails nmap :<C-u>RVcontroller :<C-u>Rcl
+autocmd User Rails nmap :<C-u>RSmodel :<C-u>Rml
+autocmd User Rails nmap :<C-u>RVmodel :<C-u>Rmj
+autocmd User Rails nmap :<C-u>RSview :<C-u>Rvj
+autocmd User Rails nmap :<C-u>RVview :<C-u>Rvl
+
 " neocomplcacheの設定
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_max_list = 30
@@ -403,6 +414,23 @@ nnoremap <silent> [unite]u  :<C-u>Unite -no-split buffer file_mru<CR>
 nnoremap <silent> [unite]m  :<C-u>Unite -no-split file_mru<CR>
 " 現在のバッファのカレントディレクトリからファイル一覧
 nnoremap <silent> [unite]d  :<C-u>UniteWithBufferDir -no-split file<CR>
+
+" unite-rails
+" model
+nnoremap <silent> [unite]rm  :<C-u>Unite -no-split -buffer-name=files rails/model<CR>
+" view
+nnoremap <silent> [unite]rv  :<C-u>Unite -no-split -buffer-name=files rails/view<CR>
+" controller
+nnoremap <silent> [unite]rc  :<C-u>Unite -no-split -buffer-name=files rails/controller<CR>
+" db
+nnoremap <silent> [unite]rd  :<C-u>Unite -no-split -buffer-name=files rails/db<CR>
+" javascript
+nnoremap <silent> [unite]rj  :<C-u>Unite -no-split -buffer-name=files rails/javascript<CR>
+" stylesheet
+nnoremap <silent> [unite]rs  :<C-u>Unite -no-split -buffer-name=files rails/stylesheet<CR>
+" config
+nnoremap <silent> [unite]rf  :<C-u>Unite -no-split -buffer-name=files rails/controller<CR>
+
 
 " ウィンドウを分割して開く
 au FileType unite nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
