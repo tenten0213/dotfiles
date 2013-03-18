@@ -146,6 +146,9 @@ Bundle 'mattn/webapi-vim'
 Bundle 'nathanaelkane/vim-indent-guides'
 "Bundle 'tell-k/vim-browsereload-mac' "vimからブラウザをリロードする
 
+"日本語の移動に便利なの
+Bundle "deton/jasegment.vim"
+
 " コード補完
 Bundle "Shougo/neocomplcache"
 Bundle "Shougo/neosnippet"
