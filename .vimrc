@@ -27,6 +27,11 @@ set cursorline " カーソル行をハイライト
 :hi clear CursorLine
 :hi CursorLine gui=underline
 highlight CursorLine ctermbg=black guibg=black
+" Leader キーを設定
+let mapleader = ","
+" 横分割時は下へ､ 縦分割時は右へ新しいウィンドウが開くようにする
+set splitbelow
+set splitright
 
 " ----- Encoding -----
 " via: http://www.kawaz.jp/pukiwiki/?vim#cb691f26
@@ -141,11 +146,9 @@ Bundle 'open-browser.vim'
 nnoremap <Leader>g :<C-u>OpenBrowserSearch<Space><C-r><C-w><Enter>
 " httpでGetとか出来るらしい。どれか依存してる？
 Bundle 'mattn/webapi-vim'
-
 " indentの深さに色を付ける
 Bundle 'nathanaelkane/vim-indent-guides'
 "Bundle 'tell-k/vim-browsereload-mac' "vimからブラウザをリロードする
-
 " コード補完
 Bundle "Shougo/neocomplcache"
 Bundle "Shougo/neosnippet"
@@ -272,11 +275,6 @@ else
   let g:vimproc_dll_path = $HOME . '/.vim/bundle/vimproc/autoload/vimproc_unix.so'
 endif
 
-"RSpec対応
-let g:quickrun_config = {}
-let g:quickrun_config['ruby.rspec'] = {'command': "rspec"}
-let g:quickrun_config['ruby.rspec'] = { 'command': 'rspec', 'cmdopt': 'bundle exec', 'exec': '%o %c %s' }
-
 " RSpecコマンド
 nnoremap <silent> ,rs :RunSpec<CR>
 nnoremap <silent> ,rl :RunSpecLine<CR>
@@ -294,9 +292,6 @@ function! SetUpRubySetting()
 endfunction
 autocmd FileType ruby,eruby,ruby.rspec call SetUpRubySetting()
 
-" CoffeeScriptの設定
-let g:quickrun_config = {}
-let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c -cbp %s']}
 " vimにcoffeeファイルタイプを認識させる
 au BufRead,BufNewFile,BufReadPre *.coffee   set filetype=coffee
 " インデントを設定
@@ -344,9 +339,18 @@ smap <C-k> <Plug>(neocomplcache_snippets_expand)
 inoremap <expr><C-g> neocomplcache#undo_completion()
 inoremap <expr><C-l> neocomplcache#complete_common_string()
 
+" quickrunの設定
+nmap <Leader>r <Plug>(quickrun)
+" 横分割をするようにする
+let g:quickrun_config={'*': {'split': 'below'}}
+" CoffeeScriptの設定
+let g:quickrun_config = {}
+let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c -cbp %s']}
+"RSpec対応
+let g:quickrun_config = {}
+let g:quickrun_config['ruby.rspec'] = {'command': "rspec"}
+let g:quickrun_config['ruby.rspec'] = { 'command': 'rspec', 'cmdopt': 'bundle exec', 'exec': '%o %c %s' }
 
-
-" nerdtree
 " nmap <Leader>n :NERDTreeToggle<CR>
 
 "%の移動をtabでも可能に。
