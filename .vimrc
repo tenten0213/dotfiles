@@ -143,7 +143,7 @@ Bundle 'tpope/vim-endwise.git'
 " ブラウザで開く
 Bundle 'open-browser.vim'
 " ググる
-nnoremap <Leader>g :<C-u>OpenBrowserSearch<Space><C-r><C-w><Enter>
+nnoremap <Leader>ggr :<C-u>OpenBrowserSearch<Space><C-r><C-w><Enter>
 " httpでGetとか出来るらしい。どれか依存してる？
 Bundle 'mattn/webapi-vim'
 " indentの深さに色を付ける
