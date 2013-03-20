@@ -1,5 +1,6 @@
 begin
   require 'hirb'
+  require 'what_methods'
 rescue LoadError
   # Missing goodies, bummer
 end
