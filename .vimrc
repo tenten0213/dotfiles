@@ -203,6 +203,11 @@ Bundle 'scrooloose/syntastic'
 " jshintを使ってチェック
 let g:syntastic_javascript_checker = "jshint"
 
+" Haml
+Bundle 'tpope/vim-haml'
+" Slim
+Bundle 'slim-template/vim-slim'
+
 " CSS
 Bundle 'mattn/zencoding-vim'
 Bundle 'hail2u/vim-css3-syntax'
