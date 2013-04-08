@@ -3,7 +3,11 @@
   name = tenten0213
   email = takehito.0213@gmail.com
 [color]
-  ui = auto
+  status = auto
+  diff = auto
+  branch = auto
+  interactive = auto
+  grep = auto
 [push]
   default = tracking       # defaultのpush先はtrackingしているリポジトリ
 [core]
