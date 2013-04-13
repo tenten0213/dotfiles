@@ -124,7 +124,7 @@ set listchars=tab:>-,trail:-,nbsp:%,extends:>,precedes:<
 vnoremap <silent> <C-p> "0p<CR>
 
 " Vundle を初期化してVundle 自身も Vundle で管理
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/vundle.git
 call vundle#rc()
 Bundle 'gmarik/vundle'
 
