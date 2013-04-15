@@ -124,7 +124,7 @@ set listchars=tab:>-,trail:-,nbsp:%,extends:>,precedes:<
 vnoremap <silent> <C-p> "0p<CR>
 
 " Vundle を初期化してVundle 自身も Vundle で管理
-set rtp+=~/.vim/vundle.git
+set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
 
@@ -136,15 +136,18 @@ Bundle 'Source-Explorer-srcexpl.vim'
 Bundle 'taglist.vim'
 Bundle 'trinity.vim'
 
+" multipule
+Bundle 'terryma/vim-multiple-cursors'
+
 " endなどを自動挿入
 Bundle 'tpope/vim-endwise.git'
-" vimからdb弄る(使ってないからコメントアウト)
- Bundle 'vim-scripts/dbext.vim'
+" vimからdb弄る
+Bundle 'vim-scripts/dbext.vim'
 " ブラウザで開く
 Bundle 'open-browser.vim'
 " ググる
 nnoremap <Leader>ggr :<C-u>OpenBrowserSearch<Space><C-r><C-w><Enter>
-" httpでGetとか出来るらしい。どれか依存してる？
+" httpでGetとか出来る
 Bundle 'mattn/webapi-vim'
 " indentの深さに色を付ける
 Bundle 'nathanaelkane/vim-indent-guides'
