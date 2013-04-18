@@ -33,6 +33,17 @@ let mapleader = ","
 set splitbelow
 set splitright
 
+" OSのクリップボードを使用する
+set clipboard+=unnamed
+" ターミナルでマウスを使用できるようにする
+set mouse=a
+set guioptions+=a
+set ttymouse=xterm2
+"ヤンクした文字は、システムのクリップボードに入れる"
+set clipboard=unnamed
+" 挿入モードでCtrl+kを押すとクリップボードの内容を貼り付けられるようにする "
+imap <C-p>  <ESC>"*pa
+
 " ----- Encoding -----
 " via: http://www.kawaz.jp/pukiwiki/?vim#cb691f26
 " 文字コードの自動認識
@@ -122,6 +133,8 @@ set listchars=tab:>-,trail:-,nbsp:%,extends:>,precedes:<
 
 " ヤンクした値を連続でペーストする設定
 vnoremap <silent> <C-p> "0p<CR>
+"ビジュアルモード時vで行末まで選択
+vnoremap v $h
 
 " Vundle を初期化してVundle 自身も Vundle で管理
 set rtp+=~/.vim/bundle/vundle/
@@ -375,6 +388,18 @@ let g:quickrun_config['ruby.rspec'] = {'command': "rspec"}
 let g:quickrun_config['ruby.rspec'] = { 'command': 'rspec', 'cmdopt': 'bundle exec', 'exec': '%o %c %s' }
 
 " nmap <Leader>n :NERDTreeToggle<CR>
+
+" Escの2回押しでハイライト消去
+nmap <ESC><ESC> :nohlsearch<CR><ESC>
+
+" insert mode での移動
+inoremap  <C-e> <END>
+inoremap  <C-a> <HOME>
+" インサートモードでもhjklで移動（Ctrl押すけどね）
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
 
 "%の移動をtabでも可能に。
 " tab means %
