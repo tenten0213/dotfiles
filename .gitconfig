@@ -11,7 +11,7 @@
 [push]
   default = tracking       # defaultのpush先はtrackingしているリポジトリ
 [core]
-  excludesfile = ~/.gitignore  # globalな.gitignoreの指定
+  excludesfile = ~/.gitignore
   autocrlf = input                 # CRLFを自動変換
   editor = vim
   quotepath = false
@@ -179,3 +179,9 @@
   generic = G move-last-line
   generic = ^F move-page-down
   generic = ^B move-page-up
+[difftool "sourcetree"]
+  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+  path = 
+[mergetool "sourcetree"]
+  cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+  trustExitCode = true
