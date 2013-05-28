@@ -238,7 +238,9 @@ Bundle 'cakebaker/scss-syntax.vim'
 " clojure
 Bundle 'slimv.vim'
 let g:slimv_swank_clojure = '!osascript -e "tell app \"iTerm\"" -e "tell the first terminal" -e "set mysession to current session" -e "launch session \"Default Session\"" -e "tell the last session" -e "exec command \"/bin/bash\"" -e "write text \"cd $(pwd)\"" -e "write text \"lein swank\"" -e "end tell" -e "select mysession" -e "end tell" -e "end tell"'
-
+Bundle 'VimClojure'
+let vimclojure#WantNailgun = 1
+let vimclojure#NailgunClient = "ng"
 
 " git
 Bundle "git://git.wincent.com/command-t.git"
