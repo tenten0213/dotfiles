@@ -15,7 +15,6 @@
   autocrlf = input                 # CRLFを自動変換
   editor = vim
   quotepath = false
-  pager = lv
   whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
 
 [web]
@@ -180,8 +179,8 @@
   generic = ^F move-page-down
   generic = ^B move-page-up
 [difftool "sourcetree"]
-  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-  path = 
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
 [mergetool "sourcetree"]
-  cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-  trustExitCode = true
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
