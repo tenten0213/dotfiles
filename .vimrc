@@ -238,9 +238,11 @@ Bundle 'cakebaker/scss-syntax.vim'
 " clojure
 Bundle 'slimv.vim'
 let g:slimv_swank_clojure = '!osascript -e "tell app \"iTerm\"" -e "tell the first terminal" -e "set mysession to current session" -e "launch session \"Default Session\"" -e "tell the last session" -e "exec command \"/bin/bash\"" -e "write text \"cd $(pwd)\"" -e "write text \"lein swank\"" -e "end tell" -e "select mysession" -e "end tell" -e "end tell"'
-Bundle 'VimClojure'
-let vimclojure#WantNailgun = 1
-let vimclojure#NailgunClient = "ng"
+au BufRead,BufNewFile,BufReadPre *.clj   set filetype=clojure
+"Bundle "thinca/vim-ft-clojure"
+"Bundle 'VimClojure'
+"let vimclojure#WantNailgun = 1
+"let vimclojure#NailgunClient = "ng"
 
 " git
 Bundle "git://git.wincent.com/command-t.git"
@@ -341,7 +343,7 @@ let g:indent_guides_space_guides=1
 
 hi IndentGuidesOdd  ctermbg=235
 hi IndentGuidesEven ctermbg=237
-au FileType coffee,ruby,javascript,python IndentGuidesEnable
+au FileType coffee,ruby,javascript,python,clojure IndentGuidesEnable
 nmap <silent><Leader>ig <Plug>IndentGuidesToggle
 
 "rubyの設定
@@ -381,6 +383,20 @@ imap <C-k> <Plug>(neocomplcache_snippets_expand)
 smap <C-k> <Plug>(neocomplcache_snippets_expand)
 inoremap <expr><C-g> neocomplcache#undo_completion()
 inoremap <expr><C-l> neocomplcache#complete_common_string()
+
+" neosnippetの設定
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable() <Bar><bar> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable() <Bar><bar> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
+
 
 " quickrunの設定
 nmap <Leader>r <Plug>(quickrun)
