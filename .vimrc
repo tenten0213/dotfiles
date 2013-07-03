@@ -18,7 +18,7 @@ set shiftwidth=2
 set number "行番号を表示する
 set incsearch "インクリメンタルサーチ
 set ignorecase "検索時に大文字小文字を無視する
-set showmatch "対応する括弧のハイライト表示する
+set showmatch "対応する括弧のハイラ/イト表示する
 set showmode "モード表示する
 set title "編集中のファイル名を表示する
 set ruler "ルーラーの表示する
@@ -34,15 +34,13 @@ set splitbelow
 set splitright
 
 " OSのクリップボードを使用する
-set clipboard+=unnamed
+set clipboard=unnamed,autoselect
+" 挿入モードでCtrl+kを押すとクリップボードの内容を貼り付けられるようにする "
+imap <C-p>  <ESC>"*pa
 " ターミナルでマウスを使用できるようにする
 set mouse=a
 set guioptions+=a
 set ttymouse=xterm2
-"ヤンクした文字は、システムのクリップボードに入れる"
-set clipboard=unnamed
-" 挿入モードでCtrl+kを押すとクリップボードの内容を貼り付けられるようにする "
-imap <C-p>  <ESC>"*pa
 
 " ----- Encoding -----
 " via: http://www.kawaz.jp/pukiwiki/?vim#cb691f26
