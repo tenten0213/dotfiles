@@ -414,13 +414,14 @@ let g:quickrun_config['ruby.rspec'] = { 'command': 'rspec', 'cmdopt': 'bundle ex
 nmap <ESC><ESC> :nohlsearch<CR><ESC>
 
 " insert mode での移動
-inoremap  <C-e> <END>
-inoremap  <C-a> <HOME>
-" インサートモードでもhjklで移動（Ctrl押すけどね）
+inoremap <C-e> <END>
+inoremap <C-a> <HOME>
 inoremap <C-j> <Down>
 inoremap <C-k> <Up>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
+inoremap <C-b> <BS>
+inoremap <C-d> <DEL>
 
 "%の移動をtabでも可能に。
 " tab means %
