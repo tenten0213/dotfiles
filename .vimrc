@@ -7,7 +7,7 @@ set vb t_vb= " ビープをならさない
 set whichwrap=b,s,h,l,<,>,[,]    " カーソルを行頭、行末で止まらないようにする
 syntax on "シンタックスハイライトを有効にする
 set autoindent "オートインデントする
-"" タブ幅の設定
+" タブ幅の設定
 set expandtab
 set tabstop=2
 set softtabstop=2
@@ -212,10 +212,11 @@ let g:surround_{char2nr("-")} = ":\r"
 Bundle 'smartchr'
 
 " YankRing.vim : ヤンクの履歴を管理し、順々に参照、出力できるようにする
+" pasteした後にCtrl+n,pで履歴から貼り付けられる
 Bundle 'YankRing.vim'
 " Yankの履歴参照
-nmap ,y ;YRShow<CR>
-
+" ノーマルモード,yでYankの履歴参照
+nnoremap <silent> ,y :YRShow<CR>
 
 " Ruby
 Bundle 'ruby-matchit'
