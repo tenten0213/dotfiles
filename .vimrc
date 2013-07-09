@@ -5,10 +5,7 @@ set autoread "他で書き換えられたら読み込み直す
 set formatoptions=lmoq " テキスト整形オプション，マルチバイト系を追加
 set vb t_vb= " ビープをならさない
 set whichwrap=b,s,h,l,<,>,[,]    " カーソルを行頭、行末で止まらないようにする
-filetype off " ファイル形式の検出を無効にする
 syntax on "シンタックスハイライトを有効にする
-set encoding=utf-8 "デフォルトの文字コード
-set fileencoding=utf-8 "デフォルトの文字コード
 set autoindent "オートインデントする
 "" タブ幅の設定
 set expandtab
@@ -34,74 +31,50 @@ set splitbelow
 set splitright
 
 " OSのクリップボードを使用する
-set clipboard=unnamed,autoselect
-" 挿入モードでCtrl+kを押すとクリップボードの内容を貼り付けられるようにする "
+set clipboard+=unnamed
+"ヤンクした文字は、システムのクリップボードに入れる
+set clipboard=unnamed
+" 挿入モードでCtrl+kを押すとクリップボードの内容を貼り付けられるようにする
 imap <C-p>  <ESC>"*pa
 " ターミナルでマウスを使用できるようにする
 set mouse=a
 set guioptions+=a
 set ttymouse=xterm2
 
-" ----- Encoding -----
-" via: http://www.kawaz.jp/pukiwiki/?vim#cb691f26
-" 文字コードの自動認識
-if &encoding !=# 'utf-8'
-  set encoding=japan
-  set fileencoding=japan
-endif
-if has('iconv')
-  let s:enc_euc = 'euc-jp'
-  let s:enc_jis = 'iso-2022-jp'
-  " iconvがeucJP-msに対応しているかをチェック
-  if iconv("\x87\x64\x87\x6a", 'cp932', 'eucjp-ms') ==# "\xad\xc5\xad\xcb"
-    let s:enc_euc = 'eucjp-ms'
-    let s:enc_jis = 'iso-2022-jp-3'
-  " iconvがJISX0213に対応しているかをチェック
-  elseif iconv("\x87\x64\x87\x6a", 'cp932', 'euc-jisx0213') ==# "\xad\xc5\xad\xcb"
-    let s:enc_euc = 'euc-jisx0213'
-    let s:enc_jis = 'iso-2022-jp-3'
-  endif
-  " fileencodingsを構築
-  if &encoding ==# 'utf-8'
-    let s:fileencodings_default = &fileencodings
-    let &fileencodings = s:enc_jis .','. s:enc_euc .',cp932'
-    let &fileencodings = &fileencodings .','. s:fileencodings_default
-    unlet s:fileencodings_default
-  else
-    let &fileencodings = &fileencodings .','. s:enc_jis
-    set fileencodings+=utf-8,ucs-2le,ucs-2
-    if &encoding =~# '^\(euc-jp\|euc-jisx0213\|eucjp-ms\)$'
-      set fileencodings+=cp932
-      set fileencodings-=euc-jp
-      set fileencodings-=euc-jisx0213
-      set fileencodings-=eucjp-ms
-      let &encoding = s:enc_euc
-      let &fileencoding = s:enc_euc
-    else
-      let &fileencodings = &fileencodings .','. s:enc_euc
-    endif
-  endif
-  " 定数を処分
-  unlet s:enc_euc
-  unlet s:enc_jis
-endif
-" 日本語を含まない場合は fileencoding に encoding を使うようにする
-if has('autocmd')
-  function! AU_ReCheck_FENC()
-    if &fileencoding =~# 'iso-2022-jp' && search("[^\x01-\x7e]", 'n') == 0
-      let &fileencoding=&encoding
-    endif
-  endfunction
-  autocmd BufReadPost * call AU_ReCheck_FENC()
-endif
+"-------------------------------------------------------------------------------
+" エンコーディング関連 Encoding
+"-------------------------------------------------------------------------------
+set ffs=unix,dos,mac  " 改行文字
+set encoding=utf-8    " デフォルトエンコーディング
 
-" 改行コードの自動認識
-set fileformats=unix,dos,mac
-" □とか○の文字があってもカーソル位置がずれないようにする
-if exists('&ambiwidth')
-  set ambiwidth=double
-endif
+set encoding=utf-8 "デフォルトの文字コード
+set fileencoding=utf-8 "デフォルトの文字コード
 
+" 文字コード認識はbanyan/recognize_charcode.vimへ
+" cvsの時は文字コードをeuc-jpに設定
+autocmd FileType cvs :set fileencoding=euc-jp
+" 以下のファイルの時は文字コードをutf-8に設定
+autocmd FileType svn :set fileencoding=utf-8
+autocmd FileType js :set fileencoding=utf-8
+autocmd FileType css :set fileencoding=utf-8
+autocmd FileType html :set fileencoding=utf-8
+autocmd FileType xml :set fileencoding=utf-8
+autocmd FileType json :set fileencoding=utf-8
+autocmd FileType java :set fileencoding=utf-8
+autocmd FileType scala :set fileencoding=utf-8
+autocmd FileType clojure :set fileencoding=utf-8
+autocmd FileType ruby :set fileencoding=utf-8
+
+" ワイルドカードで表示するときに優先度を低くする拡張子
+set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
+
+" 指定文字コードで強制的にファイルを開く
+command! Cp932 edit ++enc=cp932
+command! Eucjp edit ++enc=euc-jp
+command! Iso2022jp edit ++enc=iso-2022-jp
+command! Utf8 edit ++enc=utf-8
+command! Jis Iso2022jp
+command! Sjis Cp932
 
 " カレントウィンドウにのみ罫線を引く
 augroup cch
@@ -134,10 +107,14 @@ vnoremap <silent> <C-p> "0p<CR>
 "ビジュアルモード時vで行末まで選択
 vnoremap v $h
 
+filetype off " ファイル形式の検出を無効にする
 " Vundle を初期化してVundle 自身も Vundle で管理
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
+
+" 文字コード
+Bundle 'banyan/recognize_charcode.vim'
 
 " ライブラリ管理
 Bundle 'gmarik/vundle'
@@ -185,10 +162,60 @@ Bundle 'thinca/vim-quickrun'
 Bundle "Shougo/vimproc"
 Bundle "Shougo/vimshell"
 
+
+"------------------------------------
+"" smooth_scroll.vim
+"------------------------------------
+Bundle 'yuroyoro/smooth_scroll.vim'
+map  :call SmoothScroll("d",1, 1)<CR>
+map :call SmoothScroll("u",1, 1)<CR>
+
 " ファイルツリー表示
 Bundle "scrooloose/nerdtree"
 
+"------------------------------------
+" NERD_commenter.vim
+"------------------------------------
+" コメントトグル<Leader>c<space>でコメントをトグル)
+Bundle 'scrooloose/nerdcommenter.git'
+" コメントの間にスペースを空ける
+let NERDSpaceDelims = 1
+"<Leader>xでコメントをトグル(NERD_commenter.vim)
+map <Leader>x, c<space>
+"未対応ファイルタイプのエラーメッセージを表示しない
+let NERDShutUp=1
+
+"------------------------------------
+" Align
+"------------------------------------
+" Align : 高機能整形・桁揃えプラグイン
+Bundle 'Align'
+" Alignを日本語環境で使用するための設定
+let g:Align_xstrlen = 3
+
+" マルチバイト対応の整形
+Bundle 'h1mesuke/vim-alignta'
+
+"------------------------------------
+" surround.vim
+"------------------------------------
+" surround.vim : テキストを括弧で囲む／削除する
 Bundle 'tpope/vim-surround'
+" s, ssで選択範囲を指定文字でくくる
+"nmap s <Plug>Ysurround
+"nmap ss <Plug>Yssurround
+let g:surround_{char2nr('e')} = "begin \r end"
+let g:surround_{char2nr('d')} = "do \r end"
+let g:surround_{char2nr("-")} = ":\r"
+
+" smartchr.vim : ==などの前後を整形
+Bundle 'smartchr'
+
+" YankRing.vim : ヤンクの履歴を管理し、順々に参照、出力できるようにする
+Bundle 'YankRing.vim'
+" Yankの履歴参照
+nmap ,y ;YRShow<CR>
+
 
 " Ruby
 Bundle 'ruby-matchit'
@@ -207,11 +234,13 @@ Bundle 'JavaScript-syntax'
 " Bundle 'itspriddle/vim-javascript-indent'
 Bundle 'jiangmiao/simple-javascript-indenter'
 Bundle 'teramako/jscomplete-vim'
+
 " DOMとMozilla関連とES6のメソッドを補完
 let g:jscomplete_use = ['dom', 'moz', 'es6th']
 " Bundle 'taichouchou2/vim-javascript' " jQuery syntax追加
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'jQuery'
+
 au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
 Bundle 'scrooloose/syntastic'
 " jshintを使ってチェック
@@ -271,7 +300,7 @@ colorscheme desert
 " Twitter
 Bundle 'TwitVim'
 let twitvim_count = 40
-nnoremap ,tt :<C-u>PosttoTwitter<CR> "ツイーヨ
+nnoremap ,tw :<C-u>PosttoTwitter<CR> "ツイーヨ
 nnoremap ,tl :<C-u>FriendsTwitter<CR><C-w><C-k> "タイムライン表示
 nnoremap ,tu :<C-u>UserTwitter<CR><C-w><C-k> "自分のつぶやき
 nnoremap ,tr :<C-u>RepliesTwitter<CR><C-w><C-k> "リプ
