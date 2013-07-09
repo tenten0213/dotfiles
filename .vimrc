@@ -3,6 +3,7 @@ set noswapfile " swpファイルを作成しない
 set nobackup "バックアップファイルを作らない設定にする
 set autoread "他で書き換えられたら読み込み直す
 set formatoptions=lmoq " テキスト整形オプション，マルチバイト系を追加
+set hidden
 set vb t_vb= " ビープをならさない
 set whichwrap=b,s,h,l,<,>,[,]    " カーソルを行頭、行末で止まらないようにする
 syntax on "シンタックスハイライトを有効にする
@@ -16,7 +17,10 @@ set number "行番号を表示する
 set incsearch "インクリメンタルサーチ
 set ignorecase "検索時に大文字小文字を無視する
 set showmatch "対応する括弧のハイラ/イト表示する
+set showcmd "コマンドをステータス行に表示
 set showmode "モード表示する
+set backspace=indent,eol,start
+set viminfo='50,<1000,s100,\"50  " viminfoファイルの設定
 set title "編集中のファイル名を表示する
 set ruler "ルーラーの表示する
 set virtualedit+=block " 矩形選択で自由に移動する
@@ -40,6 +44,8 @@ imap <C-p>  <ESC>"*pa
 set mouse=a
 set guioptions+=a
 set ttymouse=xterm2
+" ファイルタイプ判定をon
+filetype plugin on
 
 "-------------------------------------------------------------------------------
 " エンコーディング関連 Encoding
