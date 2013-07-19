@@ -292,6 +292,22 @@ nnoremap <silent> ,gl :Glog<CR>
 " markdown
 Bundle 'plasticboy/vim-markdown'
 
+" textile
+Bundle 'timcharper/textile.vim'
+
+" JSON
+Bundle 'elzr/vim-json'
+" jq
+command! -nargs=? Jq call s:Jq(<f-args>)
+function! s:Jq(...)
+    if 0 == a:0
+        let l:arg = "."
+    else
+        let l:arg = a:1
+    endif
+    execute "%! jq \"" . l:arg . "\""
+endfunction
+
 " reference環境
 Bundle 'thinca/vim-ref'
 Bundle 'taichouchou2/vim-ref-ri'
@@ -443,6 +459,15 @@ let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c -cbp %s']
 let g:quickrun_config = {}
 let g:quickrun_config['ruby.rspec'] = {'command': "rspec"}
 let g:quickrun_config['ruby.rspec'] = { 'command': 'rspec', 'cmdopt': 'bundle exec', 'exec': '%o %c %s' }
+
+
+let g:quickrun_config = {
+    \ 'textile': {
+    \   'command'   : 'redcloth',
+    \   'exec'      : '%c  %s',
+    \   'outputter' : 'browser',
+    \ },
+    \}
 
 " nmap <Leader>n :NERDTreeToggle<CR>
 
