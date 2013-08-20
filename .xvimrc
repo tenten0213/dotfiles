@@ -1,0 +1,8 @@
+nmap ,r :run<CR>
+nmap ,m :make<CR>
+nmap ,s :xccmd changeToStandardEditor<CR>
+nmap ,a :xccmd changeToGeniusEditor<CR>
+nmap ,v :xccmd changeToVersionEditor<CR>
+nmap <c-n> :xccmd jumpToNextCounterpart<CR>
+nmap <c-t>n :xccmd selectNextTab<CR>
+nmap <c-t>p :xccmd selectPreviousTab<CR>
