@@ -295,6 +295,20 @@ Bundle 'plasticboy/vim-markdown'
 " textile
 Bundle 'timcharper/textile.vim'
 
+" evervim
+Bundle 'kakkyz81/evervim'
+" * evervim {{{
+nnoremap <silent> ,el :<C-u>EvervimNotebookList<CR>
+nnoremap <silent> ,eT :<C-u>EvervimListTags<CR>
+nnoremap <silent> ,en :<C-u>EvervimCreateNote<CR>
+nnoremap <silent> ,eb :<C-u>EvervimOpenBrowser<CR>
+nnoremap <silent> ,ec :<C-u>EvervimOpenClient<CR>
+nnoremap ,es :<C-u>EvervimSearchByQuery<SPACE>
+nnoremap <silent> ,et :<C-u>EvervimSearchByQuery<SPACE>tag:todo -tag:done -tag:someday<CR>
+nnoremap <silent> ,eta :<C-u>EvervimSearchByQuery<SPACE>tag:todo -tag:done<CR>
+let g:evervim_splitoption=''
+" ------------------------ }}}
+
 " JSON
 Bundle 'elzr/vim-json'
 " jq
@@ -447,7 +461,6 @@ if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
 
-
 " quickrunの設定
 nmap <Leader>r <Plug>(quickrun)
 " 横分割をするようにする
@@ -459,6 +472,16 @@ let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c -cbp %s']
 let g:quickrun_config = {}
 let g:quickrun_config['ruby.rspec'] = {'command': "rspec"}
 let g:quickrun_config['ruby.rspec'] = { 'command': 'rspec', 'cmdopt': 'bundle exec', 'exec': '%o %c %s' }
+
+let g:quickrun_config = {}
+let g:quickrun_config.markdown= {
+      \ 'outputter' : 'null',
+      \ 'command'   : 'open',
+      \ 'cmdopt'    : '-a',
+      \ 'args'      : 'Marked',
+      \ 'exec'      : '%c %o %a %s',
+      \ }
+
 
 
 let g:quickrun_config = {
