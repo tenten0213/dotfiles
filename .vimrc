@@ -13,15 +13,12 @@ set expandtab
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
+set laststatus=2
 set number "行番号を表示する
 set incsearch "インクリメンタルサーチ
 set ignorecase "検索時に大文字小文字を無視する
 set showmatch "対応する括弧のハイラ/イト表示する
-set showcmd "コマンドをステータス行に表示
-set showmode "モード表示する
 set backspace=indent,eol,start
-set viminfo='50,<1000,s100,\"50  " viminfoファイルの設定
-set title "編集中のファイル名を表示する
 set ruler "ルーラーの表示する
 set virtualedit+=block " 矩形選択で自由に移動する
 set cursorline " カーソル行をハイライト
@@ -133,6 +130,8 @@ Bundle 'trinity.vim'
 " multipule
 Bundle 'terryma/vim-multiple-cursors'
 
+Bundle 'bling/vim-airline'
+
 " endなどを自動挿入
 Bundle 'tpope/vim-endwise.git'
 " vimからdb弄る
@@ -234,17 +233,14 @@ Bundle 'tpope/vim-rails'
 Bundle "rails.vim"
 Bundle 'ujihisa/unite-rake'
 Bundle 'basyura/unite-rails'
-"Bundle 'vim-scripts/project.vim'
 
 " js
 Bundle 'JavaScript-syntax'
-" Bundle 'itspriddle/vim-javascript-indent'
 Bundle 'jiangmiao/simple-javascript-indenter'
 Bundle 'teramako/jscomplete-vim'
 
 " DOMとMozilla関連とES6のメソッドを補完
 let g:jscomplete_use = ['dom', 'moz', 'es6th']
-" Bundle 'taichouchou2/vim-javascript' " jQuery syntax追加
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'jQuery'
 
@@ -277,6 +273,8 @@ au BufRead,BufNewFile,BufReadPre *.clj   set filetype=clojure
 "Bundle 'VimClojure'
 "let vimclojure#WantNailgun = 1
 "let vimclojure#NailgunClient = "ng"
+
+Bundle 'scrooloose/syntastic'
 
 " git
 Bundle "git://git.wincent.com/command-t.git"
@@ -322,17 +320,25 @@ function! s:Jq(...)
     execute "%! jq \"" . l:arg . "\""
 endfunction
 
+" CSV
+Bundle 'chrisbra/csv.vim'
+
 " reference環境
 Bundle 'thinca/vim-ref'
-Bundle 'taichouchou2/vim-ref-ri'
-Bundle 'taq/vim-rspec'
-" :HttpStatus でHttpStatusを表示
-Bundle 'mattn/httpstatus-vim'
 " カラースキーマ
 Bundle 'ujihisa/unite-colorscheme'
 Bundle 'nanotech/jellybeans.vim'
+Bundle 'w0ng/vim-hybrid'
+Bundle 'vim-scripts/twilight'
+Bundle 'jonathanfilip/vim-lucius'
+Bundle 'jpo/vim-railscasts-theme'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'vim-scripts/Wombat'
 Bundle 'tomasr/molokai'
-colorscheme desert
+Bundle 'vim-scripts/rdark'
+syntax enable
+set background=dark
+colorscheme solarized
 
 " Twitter
 Bundle 'TwitVim'

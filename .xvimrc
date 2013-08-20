@@ -1,8 +1,13 @@
 nmap ,r :run<CR>
 nmap ,m :make<CR>
+" Xcodeのコマンドについては以下を参照
+" https://github.com/JugglerShu/XVim/blob/master/Documents/Developers/MenuActionList.txt
 nmap ,s :xccmd changeToStandardEditor<CR>
 nmap ,a :xccmd changeToGeniusEditor<CR>
 nmap ,v :xccmd changeToVersionEditor<CR>
+nmap ,n :xccmd toggleNavigatorsVisibility<CR>
+nmap ,d :xccmd toggleDebuggerVisibility<CR>
+nmap ,u :xccmd toggleUtilitiesVisibility<CR>
 nmap <c-n> :xccmd jumpToNextCounterpart<CR>
 nmap <c-t>n :xccmd selectNextTab<CR>
 nmap <c-t>p :xccmd selectPreviousTab<CR>
