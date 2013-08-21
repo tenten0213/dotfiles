@@ -159,11 +159,29 @@ Bundle 'gmarik/vundle'
 " tagsを利用したソースコード閲覧・移動補助機能
 Bundle 'Source-Explorer-srcexpl.vim'
 Bundle 'taglist.vim'
-Bundle 'trinity.vim' 
+Bundle 'trinity.vim'
 " multipule
 Bundle 'terryma/vim-multiple-cursors' 
+
+" カラースキーマ
+Bundle 'ujihisa/unite-colorscheme'
+Bundle 'nanotech/jellybeans.vim'
+Bundle 'w0ng/vim-hybrid'
+Bundle 'vim-scripts/twilight'
+Bundle 'jonathanfilip/vim-lucius'
+Bundle 'jpo/vim-railscasts-theme'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'vim-scripts/Wombat'
+Bundle 'tomasr/molokai'
+Bundle 'vim-scripts/rdark'
+Bundle 'baskerville/bubblegum'
+Bundle 'pyte.vim'
+syntax enable
+set background=dark
+colorscheme solarized
 " Statusを格好良く表示
 Bundle 'bling/vim-airline'
+let g:airline_theme='light'
 " endなどを自動挿入
 Bundle 'tpope/vim-endwise.git'
 " ブラウザで開く
@@ -341,20 +359,6 @@ Bundle 'chrisbra/csv.vim'
 
 " reference環境
 Bundle 'thinca/vim-ref'
-" カラースキーマ
-Bundle 'ujihisa/unite-colorscheme'
-Bundle 'nanotech/jellybeans.vim'
-Bundle 'w0ng/vim-hybrid'
-Bundle 'vim-scripts/twilight'
-Bundle 'jonathanfilip/vim-lucius'
-Bundle 'jpo/vim-railscasts-theme'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'vim-scripts/Wombat'
-Bundle 'tomasr/molokai'
-Bundle 'vim-scripts/rdark'
-syntax enable
-set background=dark
-colorscheme solarized
 
 " ファイル形式検出、プラグイン、インデントを ON
 :set shiftwidth=2
