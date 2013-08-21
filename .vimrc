@@ -8,7 +8,6 @@ set vb t_vb= " ビープをならさない
 set whichwrap=b,s,h,l,<,>,[,]    " カーソルを行頭、行末で止まらないようにする
 syntax on "シンタックスハイライトを有効にする
 set autoindent "オートインデントする
-" タブ幅の設定
 set expandtab
 set tabstop=2
 set softtabstop=2
@@ -30,7 +29,6 @@ let mapleader = ","
 " 横分割時は下へ､ 縦分割時は右へ新しいウィンドウが開くようにする
 set splitbelow
 set splitright
-
 " OSのクリップボードを使用する
 set clipboard+=unnamed
 "ヤンクした文字は、システムのクリップボードに入れる
@@ -55,8 +53,7 @@ set fileencoding=utf-8 "デフォルトの文字コード
 
 " 文字コード認識はbanyan/recognize_charcode.vimへ
 " cvsの時は文字コードをeuc-jpに設定
-autocmd FileType cvs :set fileencoding=euc-jp
-" 以下のファイルの時は文字コードをutf-8に設定
+"autocmd FileType cvs :set fileencoding=euc-jp
 autocmd FileType svn :set fileencoding=utf-8
 autocmd FileType js :set fileencoding=utf-8
 autocmd FileType css :set fileencoding=utf-8
@@ -110,6 +107,43 @@ vnoremap <silent> <C-p> "0p<CR>
 "ビジュアルモード時vで行末まで選択
 vnoremap v $h
 
+" Escの2回押しでハイライト消去
+nmap <ESC><ESC> :nohlsearch<CR><ESC>
+
+" insert mode での移動
+inoremap <C-e> <END>
+inoremap <C-a> <HOME>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
+inoremap <C-b> <BS>
+inoremap <C-d> <DEL>
+
+"%の移動をtabでも可能に。
+" tab means %
+nnoremap <tab> %
+
+"splitの移動を簡単に。ctrl押しながらhjkl
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" タブ関連のキーマッピング
+nnoremap [TABCMD]  <nop>
+nmap     <leader>t [TABCMD]
+
+nnoremap <silent> [TABCMD]f :<c-u>tabfirst<cr>
+nnoremap <silent> [TABCMD]l :<c-u>tablast<cr>
+nnoremap <silent> [TABCMD]n :<c-u>tabnext<cr>
+nnoremap <silent> [TABCMD]N :<c-u>tabNext<cr>
+nnoremap <silent> [TABCMD]p :<c-u>tabprevious<cr>
+nnoremap <silent> [TABCMD]e :<c-u>tabedit<cr>
+nnoremap <silent> [TABCMD]c :<c-u>tabclose<cr>
+nnoremap <silent> [TABCMD]o :<c-u>tabonly<cr>
+nnoremap <silent> [TABCMD]s :<c-u>tabs<cr>
+
 filetype off " ファイル形式の検出を無効にする
 " Vundle を初期化してVundle 自身も Vundle で管理
 set rtp+=~/.vim/bundle/vundle/
@@ -125,17 +159,13 @@ Bundle 'gmarik/vundle'
 " tagsを利用したソースコード閲覧・移動補助機能
 Bundle 'Source-Explorer-srcexpl.vim'
 Bundle 'taglist.vim'
-Bundle 'trinity.vim'
-
+Bundle 'trinity.vim' 
 " multipule
-Bundle 'terryma/vim-multiple-cursors'
-
+Bundle 'terryma/vim-multiple-cursors' 
+" Statusを格好良く表示
 Bundle 'bling/vim-airline'
-
 " endなどを自動挿入
 Bundle 'tpope/vim-endwise.git'
-" vimからdb弄る
-Bundle 'vim-scripts/dbext.vim'
 " ブラウザで開く
 Bundle 'open-browser.vim'
 " ググる
@@ -293,20 +323,6 @@ Bundle 'plasticboy/vim-markdown'
 " textile
 Bundle 'timcharper/textile.vim'
 
-" evervim
-Bundle 'kakkyz81/evervim'
-" * evervim {{{
-nnoremap <silent> ,el :<C-u>EvervimNotebookList<CR>
-nnoremap <silent> ,eT :<C-u>EvervimListTags<CR>
-nnoremap <silent> ,en :<C-u>EvervimCreateNote<CR>
-nnoremap <silent> ,eb :<C-u>EvervimOpenBrowser<CR>
-nnoremap <silent> ,ec :<C-u>EvervimOpenClient<CR>
-nnoremap ,es :<C-u>EvervimSearchByQuery<SPACE>
-nnoremap <silent> ,et :<C-u>EvervimSearchByQuery<SPACE>tag:todo -tag:done -tag:someday<CR>
-nnoremap <silent> ,eta :<C-u>EvervimSearchByQuery<SPACE>tag:todo -tag:done<CR>
-let g:evervim_splitoption=''
-" ------------------------ }}}
-
 " JSON
 Bundle 'elzr/vim-json'
 " jq
@@ -339,23 +355,6 @@ Bundle 'vim-scripts/rdark'
 syntax enable
 set background=dark
 colorscheme solarized
-
-" Twitter
-Bundle 'TwitVim'
-let twitvim_count = 40
-nnoremap ,tw :<C-u>PosttoTwitter<CR> "ツイーヨ
-nnoremap ,tl :<C-u>FriendsTwitter<CR><C-w><C-k> "タイムライン表示
-nnoremap ,tu :<C-u>UserTwitter<CR><C-w><C-k> "自分のつぶやき
-nnoremap ,tr :<C-u>RepliesTwitter<CR><C-w><C-k> "リプ
-nnoremap ,td :<C-u>NextTwitter<CR> "DM
-"Bundle "mattn/streamer-vim"
-"Bundle "basyura/twibill.vim"
-"Bundle "rhysd/unite-twitter.vim"
-
-autocmd FileType twitvim call s:twitvim_my_settings()
-function! s:twitvim_my_settings()
-  set nowrap
-endfunction
 
 " ファイル形式検出、プラグイン、インデントを ON
 :set shiftwidth=2
@@ -488,8 +487,6 @@ let g:quickrun_config.markdown= {
       \ 'exec'      : '%c %o %a %s',
       \ }
 
-
-
 let g:quickrun_config = {
     \ 'textile': {
     \   'command'   : 'redcloth',
@@ -498,44 +495,6 @@ let g:quickrun_config = {
     \ },
     \}
 
-" nmap <Leader>n :NERDTreeToggle<CR>
-
-" Escの2回押しでハイライト消去
-nmap <ESC><ESC> :nohlsearch<CR><ESC>
-
-" insert mode での移動
-inoremap <C-e> <END>
-inoremap <C-a> <HOME>
-inoremap <C-j> <Down>
-inoremap <C-k> <Up>
-inoremap <C-h> <Left>
-inoremap <C-l> <Right>
-inoremap <C-b> <BS>
-inoremap <C-d> <DEL>
-
-"%の移動をtabでも可能に。
-" tab means %
-nnoremap <tab> %
-
-"splitの移動を簡単に。ctrl押しながらhjkl
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
-" タブ関連のキーマッピング
-nnoremap [TABCMD]  <nop>
-nmap     <leader>t [TABCMD]
-
-nnoremap <silent> [TABCMD]f :<c-u>tabfirst<cr>
-nnoremap <silent> [TABCMD]l :<c-u>tablast<cr>
-nnoremap <silent> [TABCMD]n :<c-u>tabnext<cr>
-nnoremap <silent> [TABCMD]N :<c-u>tabNext<cr>
-nnoremap <silent> [TABCMD]p :<c-u>tabprevious<cr>
-nnoremap <silent> [TABCMD]e :<c-u>tabedit<cr>
-nnoremap <silent> [TABCMD]c :<c-u>tabclose<cr>
-nnoremap <silent> [TABCMD]o :<c-u>tabonly<cr>
-nnoremap <silent> [TABCMD]s :<c-u>tabs<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 " 入力モードで開始する
