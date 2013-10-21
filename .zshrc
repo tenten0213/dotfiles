@@ -1,18 +1,60 @@
-export PATH="$HOME/.rbenv/bin:$PATH"
-export PATH=$HOME/.nodebrew/current/bin:$PATH
-eval "$(rbenv init -)"
+# Path to your oh-my-zsh configuration.
+ZSH=$HOME/.oh-my-zsh
+
+# Set name of the theme to load.
+# Look in ~/.oh-my-zsh/themes/
+# Optionally, if you set this to "random", it'll load a random theme each
+# time that oh-my-zsh is loaded.
+ZSH_THEME="gianu"
+
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# Set to this to use case-sensitive completion
+# CASE_SENSITIVE="true"
+
+# Uncomment this to disable bi-weekly auto-update checks
+# DISABLE_AUTO_UPDATE="true"
+
+# Uncomment to change how often before auto-updates occur? (in days)
+# export UPDATE_ZSH_DAYS=13
+
+# Uncomment following line if you want to disable colors in ls
+# DISABLE_LS_COLORS="true"
+
+# Uncomment following line if you want to disable autosetting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment following line if you want to disable command autocorrection
+# DISABLE_CORRECTION="true"
+
+# Uncomment following line if you want red dots to be displayed while waiting for completion
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment following line if you want to disable marking untracked files under
+# VCS as dirty. This makes repository status check for large repositories much,
+# much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+plugins=(git ruby osx bundler brew rails emoji-clock)
+
 _Z_CMD=j
-source ~/.zsh/z/z.sh
-precmd() {
-  _z --add "$(pwd -P)"
-}
-setopt prompt_subst
+source $ZSH/oh-my-zsh.sh
+source "$HOME/.zsh.d/z/z.sh"
 
-source $HOME/.zsh/prompt-git-current-branch
-PROMPT='
-%B%(?.%F{green}^-^%f.%F{red}@_@%f) %F{blue}[%M:%/]%f`prompt-git-current-branch`%b
-%(!.%F{red}%B%n%b%f # .%F{green}%B%n%b%f $ )'
+# Customize to your needs...
+export PATH=$PATH:/home/tenten/.rbenv/shims:/home/tenten/.rbenv/bin:/home/tenten/.rbenv/shims:/home/tenten/.rbenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
 
-alias ll='ls -la'
-vi=vim
-source $HOME/.pythonbrew/etc/bashrc
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+fpath=(~/.zsh/completion $fpath)
+autoload -U compinit
+compinit -u
+bindkey -v
+bindkey "^P" up-line-or-history
+bindkey "^N" down-line-or-history
