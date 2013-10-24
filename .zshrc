@@ -58,3 +58,8 @@ compinit -u
 bindkey -v
 bindkey "^P" up-line-or-history
 bindkey "^N" down-line-or-history
+
+# show hidden-files
+alias hfon="defaults write com.apple.finder AppleShowAllFiles true|killall Finder"
+# hidden hidden-files
+alias hfoff="defaults write com.apple.finder AppleShowAllFiles false|killall Finder"
