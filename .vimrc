@@ -232,7 +232,6 @@ NeoBundle 'vim-scripts/Wombat'
 NeoBundle 'tomasr/molokai'
 NeoBundle 'vim-scripts/rdark'
 NeoBundle 'baskerville/bubblegum'
-NeoBundle 'pyte.vim'
 syntax enable
 set background=dark
 colorscheme solarized
