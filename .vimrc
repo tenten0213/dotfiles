@@ -363,6 +363,7 @@ NeoBundle 'smartchr'
 " YankRing.vim : ヤンクの履歴を管理し、順々に参照、出力できるようにする
 " pasteした後にCtrl+n,pで履歴から貼り付けられる
 NeoBundle 'YankRing.vim'
+let g:yankring_manual_clipboard_check = 0
 " Yankの履歴参照
 " ノーマルモード,yでYankの履歴参照
 nnoremap <silent> ,y :YRShow<CR>
