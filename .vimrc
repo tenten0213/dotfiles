@@ -250,8 +250,24 @@ NeoBundleLazy 'alpaca-tc/vim-endwise.git', {
 let g:endwise_no_mappings=1
 "}}}
 
+"------------------------------------
+"" indent_guides
+"------------------------------------
 " indentの深さに色を付ける
 NeoBundle 'nathanaelkane/vim-indent-guides'
+
+let g:indent_guides_start_level=2
+let g:indent_guides_auto_colors=0
+let g:indent_guides_enable_on_vim_startup=0
+let g:indent_guides_color_change_percent=20
+let g:indent_guides_guide_size=1
+let g:indent_guides_space_guides=1
+
+hi IndentGuidesOdd  ctermbg=235
+hi IndentGuidesEven ctermbg=237
+au FileType coffee,ruby,javascript,python IndentGuidesEnable
+nmap <silent><Leader>ig <Plug>IndentGuidesToggle
+
 "日本語の移動に便利なの
 NeoBundle "deton/jasegment.vim"
 " unite
@@ -373,6 +389,8 @@ nnoremap <silent> ,y :YRShow<CR>
 "--------------------------------------
 NeoBundle 'JavaScript-syntax'
 NeoBundle 'jiangmiao/simple-javascript-indenter'
+" js BDDツール
+NeoBundle 'claco/jasmine.vim'
 " この設定入れるとshiftwidthを1にしてインデントしてくれる
 let g:SimpleJsIndenter_BriefMode = 1
 " この設定入れるとswitchのインデントがいくらかマシに
@@ -383,12 +401,19 @@ NeoBundle 'teramako/jscomplete-vim'
 let g:jscomplete_use = ['dom', 'moz', 'es6th']
 " jshintを使ってチェック
 let g:syntastic_javascript_checker = "jshint"
+
+
+"--------------------------------------
+" CoffeeScript
+"--------------------------------------
+" syntax + 自動compile
+NeoBundle 'kchmck/vim-coffee-script'
 " vimにcoffeeファイルタイプを認識させる
 au BufRead,BufNewFile,BufReadPre *.coffee   set filetype=coffee
 " インデントを設定
 autocmd FileType coffee     setlocal sw=2 sts=2 ts=2 et
 " 保存時にコンパイル
-autocmd BufWritePost *.coffee silent CoffeeMake! -cb | cwindow | redraw!
+" autocmd BufWritePost *.coffee silent CoffeeMake! -cb | cwindow | redraw!
 
 
 "--------------------------------------
