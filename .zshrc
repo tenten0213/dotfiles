@@ -98,7 +98,7 @@ source $ZSH/oh-my-zsh.sh
 source "$HOME/.zsh.d/z/z.sh"
 
 # Customize to your needs...
-export PATH=$PATH:/home/tenten/.rbenv/shims:/home/tenten/.rbenv/bin:/home/tenten/.rbenv/shims:/home/tenten/.rbenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+export PATH=$PATH:/home/tenten/.rbenv/shims:/home/tenten/.rbenv/bin:/home/tenten/.rbenv/shims:/home/tenten/.rbenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/share/npm/bin
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
