@@ -110,3 +110,6 @@ eval "$(rbenv init -)"
 fpath=(~/.zsh/completion $fpath)
 autoload -U compinit
 compinit -u
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"

@@ -414,6 +414,12 @@ autocmd FileType coffee     setlocal sw=2 sts=2 ts=2 et
 " 保存時にコンパイル
 "autocmd BufWritePost *.coffee silent CoffeeMake! -cb | cwindow | redraw!
 
+" syntax + 自動compile
+NeoBundle 'kchmck/vim-coffee-script'
+" js BDDツール
+NeoBundle 'claco/jasmine.vim'
+" indentの深さに色を付ける
+NeoBundle 'nathanaelkane/vim-indent-guides'
 
 "--------------------------------------
 " Ruby
