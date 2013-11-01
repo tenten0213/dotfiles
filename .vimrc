@@ -256,15 +256,14 @@ let g:endwise_no_mappings=1
 " indentの深さに色を付ける
 NeoBundle 'nathanaelkane/vim-indent-guides'
 
-let g:indent_guides_start_level=2
+let g:indent_guides_start_level=1
 let g:indent_guides_auto_colors=0
-let g:indent_guides_enable_on_vim_startup=0
+let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_color_change_percent=20
 let g:indent_guides_guide_size=1
 let g:indent_guides_space_guides=1
-
-hi IndentGuidesOdd  ctermbg=235
-hi IndentGuidesEven ctermbg=237
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=red
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=green
 au FileType coffee,ruby,javascript,python IndentGuidesEnable
 nmap <silent><Leader>ig <Plug>IndentGuidesToggle
 
@@ -413,7 +412,7 @@ au BufRead,BufNewFile,BufReadPre *.coffee   set filetype=coffee
 " インデントを設定
 autocmd FileType coffee     setlocal sw=2 sts=2 ts=2 et
 " 保存時にコンパイル
-" autocmd BufWritePost *.coffee silent CoffeeMake! -cb | cwindow | redraw!
+"autocmd BufWritePost *.coffee silent CoffeeMake! -cb | cwindow | redraw!
 
 
 "--------------------------------------
