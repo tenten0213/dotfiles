@@ -53,6 +53,14 @@ alias hfon="defaults write com.apple.finder AppleShowAllFiles true|killall Finde
 # hidden hidden-files
 alias hfoff="defaults write com.apple.finder AppleShowAllFiles false|killall Finder"
 
+la='ls -la'
+function cdls() {
+    # cdがaliasでループするので\をつける
+    \cd $1;
+    ls;
+}
+alias cd=cdls
+
 # 履歴ファイルの保存先
 export HISTFILE=${HOME}/.zsh_history
 
