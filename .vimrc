@@ -724,6 +724,11 @@ nnoremap <silent> ,gd :Gdiff<CR>
 nnoremap <silent> ,gb :Gblame<CR>
 nnoremap <silent> ,gl :Glog<CR>
 
+" gitの差分を表示する
+NeoBundle 'airblade/vim-gitgutter'
+nnoremap <silent> ,gg :<C-u>GitGutterToggle<CR>
+nnoremap <silent> ,gh :<C-u>GitGutterLineHighlightsToggle<CR>
+
 " markdown
 NeoBundle 'plasticboy/vim-markdown'
 
