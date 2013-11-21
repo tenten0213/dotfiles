@@ -238,6 +238,8 @@ colorscheme solarized
 " Statusを格好良く表示
 NeoBundle 'bling/vim-airline'
 let g:airline_theme='light'
+"NeoBundle 'alpaca-tc/alpaca_powertabline'
+"NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
 " endなどを自動挿入
 NeoBundleLazy 'alpaca-tc/vim-endwise.git', {
       \ 'autoload' : {
