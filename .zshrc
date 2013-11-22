@@ -41,7 +41,7 @@ ZSH_THEME="powerline"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ruby osx bundler brew rails emoji-clock)
+plugins=(git ruby osx brew rails emoji-clock)
 
 _Z_CMD=j
 source $ZSH/oh-my-zsh.sh
@@ -112,8 +112,8 @@ bindkey "^R" history-incremental-search-backward
 bindkey "^S" history-incremental-search-forward
 
 # Customize to your needs...
-export PATH=$PATH:/home/tenten/.rbenv/shims:/home/tenten/.rbenv/bin:/home/tenten/.rbenv/shims:/home/tenten/.rbenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/share/npm/bin
 export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/share/npm/bin
 eval "$(rbenv init -)"
 
 fpath=(~/.zsh/completion $fpath)
@@ -122,3 +122,7 @@ compinit -u
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+# added by travis gem
+[ -f /home/tenten0213/.travis/travis.sh ] && source /home/tenten0213/.travis/travis.sh
+PATH="/usr/local/heroku/bin:$PATH"
