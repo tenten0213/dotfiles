@@ -216,6 +216,7 @@ smap <expr><TAB> neosnippet#expandable() <Bar><bar> neosnippet#jumpable() ? "\<P
 NeoBundle 'scrooloose/syntastic'
 " reference環境
 NeoBundle 'thinca/vim-ref'
+NeoBundle 'rking/ag.vim'
 " 文字コード
 NeoBundle 'banyan/recognize_charcode.vim'
 " multipule
@@ -377,13 +378,26 @@ let g:surround_{char2nr("-")} = ":\r"
 
 " smartchr.vim : ==などの前後を整形
 NeoBundle 'smartchr'
-" YankRing.vim : ヤンクの履歴を管理し、順々に参照、出力できるようにする
-" pasteした後にCtrl+n,pで履歴から貼り付けられる
-NeoBundle 'YankRing.vim'
-let g:yankring_manual_clipboard_check = 0
-" Yankの履歴参照
-" ノーマルモード,yでYankの履歴参照
-nnoremap <silent> ,y :YRShow<CR>
+NeoBundle 'LeafCage/yankround.vim'
+
+" yankround.vim {{{
+nmap p <Plug>(yankround-p)
+nmap P <Plug>(yankround-P)
+nmap <C-p> <Plug>(yankround-prev)
+nmap <C-n> <Plug>(yankround-next)
+" 履歴取得数
+let g:yankround_max_history = 50
+"履歴一覧(kien/ctrlp.vim)
+nnoremap <silent>g<C-p> :<C-u>CtrlPYankRound<CR>
+"}}}
+
+NeoBundle 'kien/ctrlp.vim'
+
+" 自動保存
+NeoBundle 'syui/wauto.vim'
+nmap <Leader>s  <Plug>(AutoWriteStart)
+nmap <Leader>ss <Plug>(AutoWriteStop)
+let g:auto_write = 1
 
 "--------------------------------------
 " JavaScript
