@@ -239,8 +239,9 @@ colorscheme solarized
 " Statusを格好良く表示
 NeoBundle 'bling/vim-airline'
 let g:airline_theme='light'
-"NeoBundle 'alpaca-tc/alpaca_powertabline'
+NeoBundle 'alpaca-tc/alpaca_powertabline'
 "NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
+"NeoBundle 'ashwin/powerline', { 'rtp' : 'powerline/bindings/vim'}
 " endなどを自動挿入
 NeoBundleLazy 'alpaca-tc/vim-endwise.git', {
       \ 'autoload' : {
@@ -728,6 +729,7 @@ NeoBundle 'cakebaker/scss-syntax.vim'
 NeoBundle 'slimv.vim'
 let g:slimv_swank_clojure = '!osascript -e "tell app \"iTerm\"" -e "tell the first terminal" -e "set mysession to current session" -e "launch session \"Default Session\"" -e "tell the last session" -e "exec command \"/bin/bash\"" -e "write text \"cd $(pwd)\"" -e "write text \"lein swank\"" -e "end tell" -e "select mysession" -e "end tell" -e "end tell"'
 au BufRead,BufNewFile,BufReadPre *.clj   set filetype=clojure
+NeoBundle 'tpope/vim-fireplace'
 
 " git
 NeoBundle "git://git.wincent.com/command-t.git"
