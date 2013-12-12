@@ -5,8 +5,14 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-# ZSH_THEME="gianu"
-ZSH_THEME="powerline"
+case ${OSTYPE} in
+  darwin*)
+    ZSH_THEME="solarized-powerline"
+    ;;
+  linux*)
+    ZSH_THEME="gianu"
+    ;;
+esac
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -126,3 +132,4 @@ export PATH="/usr/local/heroku/bin:$PATH"
 # added by travis gem
 [ -f /home/tenten0213/.travis/travis.sh ] && source /home/tenten0213/.travis/travis.sh
 PATH="/usr/local/heroku/bin:$PATH"
+[[ -s /home/tenten0213/.pythonz/etc/bashrc ]] && source /home/tenten0213/.pythonz/etc/bashrc
