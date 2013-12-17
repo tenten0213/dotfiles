@@ -7,7 +7,7 @@ ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 case ${OSTYPE} in
   darwin*)
-    ZSH_THEME="solarized-powerline"
+    ZSH_THEME="powerline"
     ;;
   linux*)
     ZSH_THEME="gianu"
