@@ -400,6 +400,11 @@ nmap <Leader>s  <Plug>(AutoWriteStart)
 nmap <Leader>ss <Plug>(AutoWriteStop)
 let g:auto_write = 1
 
+"Calendar
+NeoBundle 'itchyny/calendar.vim'
+let g:calendar_google_calendar = 1
+let g:calendar_google_task = 1
+
 "--------------------------------------
 " JavaScript
 "--------------------------------------
