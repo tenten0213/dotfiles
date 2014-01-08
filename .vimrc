@@ -32,7 +32,7 @@ set splitright
 " OSのクリップボードを使用する
 set clipboard+=unnamed
 "ヤンクした文字は、システムのクリップボードに入れる
-set clipboard=unnamed
+set clipboard+=autoselect
 " 挿入モードでCtrl+kを押すとクリップボードの内容を貼り付けられるようにする
 imap <C-p>  <ESC>"*pa
 " ターミナルでマウスを使用できるようにする
