@@ -176,6 +176,7 @@ NeoBundleLazy 'Shougo/neosnippet', {
       \   'insert' : 1,
       \   'unite_sources' : ['snippet', 'neosnippet/user', 'neosnippet/runtime'],
       \ }}
+NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'thinca/vim-quickrun'
 " quickrunの設定
@@ -755,6 +756,24 @@ nnoremap <silent> ,gh :<C-u>GitGutterLineHighlightsToggle<CR>
 
 " markdown
 NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'kannokanno/previm'
+NeoBundle 'tyru/open-browser.vim'
+
+augroup Vimrc
+  autocmd FileType markdown call <SID>markdown_settings()
+  function! s:markdown_settings()
+    setlocal tabstop=2 shiftwidth=2 softtabstop=2
+
+    " previm
+    "let g:previm_open_cmd = 'open -a Opera'
+    "let g:previm_open_cmd = 'open -a Firefox'
+    "let g:previm_open_cmd = 'open -a Safari'
+    let g:previm_open_cmd = ''
+    nnoremap <buffer> <Space>o :<C-u>PrevimOpen<CR>
+    map <C-j> <Plug>(previm-scroll-down)
+    map <C-k> <Plug>(previm-scroll-up)
+  endfunction
+augroup END
 
 " textile
 NeoBundle 'timcharper/textile.vim'
