@@ -147,14 +147,16 @@ nnoremap <silent> [TABCMD]s :<c-u>tabs<cr>
 
 filetype off
 
-
 if has('vim_starting')
+  if !isdirectory(expand("~/.vim/bundle/neobundle.vim/"))
+    echo "install neobundle..."
+    :call system("git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim")
+  endif
   set runtimepath+=~/.vim/bundle/neobundle.vim
-  call neobundle#rc(expand('~/.vim/bundle/'))
 endif
-" originalrepos on github
-NeoBundle 'Shougo/neobundle.vim'
 
+call neobundle#rc(expand('~/.vim/bundle/'))
+NeoBundleFetch 'Shougo/neobundle.vim'
 
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
@@ -419,9 +421,6 @@ let g:SimpleJsIndenter_BriefMode = 1
 " この設定入れるとswitchのインデントがいくらかマシに
 let g:SimpleJsIndenter_CaseIndentLevel = -1
 
-NeoBundle 'teramako/jscomplete-vim'
-" DOMとMozilla関連とES6のメソッドを補完
-let g:jscomplete_use = ['dom', 'moz', 'es6th']
 " jshintを使ってチェック
 let g:syntastic_javascript_checker = "jshint"
 
@@ -812,3 +811,10 @@ nnoremap <silent> ,rl :RunSpecLine<CR>
 filetype plugin indent on     " required!
 filetype indent on
 syntax on
+
+if(!empty(neobundle#get_not_installed_bundle_names()))
+  NeoBundleInstall
+  " vimrc を再度読み込み、インストールした Bundle を有効化
+  " vimrc は必ず再読み込み可能な形式で記述すること
+  source ~/.vimrc
+end
