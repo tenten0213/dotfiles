@@ -108,3 +108,4 @@ PATH="/usr/local/heroku/bin:$PATH"
 [[ -s $HOME/.pythonz/etc/bashrc ]] && source $HOME/.pythonz/etc/bashrc
 source `which virtualenvwrapper.sh`
 export TERM="xterm-256color"
+export PATH=$HOME/.nodebrew/current/bin:$PATH
