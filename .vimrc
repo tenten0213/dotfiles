@@ -381,6 +381,18 @@ let g:surround_{char2nr('e')} = "begin \r end"
 let g:surround_{char2nr('d')} = "do \r end"
 let g:surround_{char2nr("-")} = ":\r"
 
+"------------------------------------
+" wildfire.vim
+"------------------------------------
+NeoBundle 'gcmt/wildfire.vim'
+" wildfire
+" This selects the next closest text object.
+let g:wildfire_fuel_map = "<ENTER>"
+let g:wildfire_water_map = "<BS>"
+
+" This selects the previous closest text object.
+let g:wildfire_objects = ["i'", 'i"', 'i)', 'i]', 'i}', 'ip', 'it', 'i>']
+
 " smartchr.vim : ==などの前後を整形
 NeoBundle 'smartchr'
 NeoBundle 'LeafCage/yankround.vim'
