@@ -5,3 +5,5 @@ files.list
 tags
 .netrwhist
 *.log
+*.idea
+*.iml

@@ -782,6 +782,16 @@ let g:slimv_swank_clojure = '!osascript -e "tell app \"iTerm\"" -e "tell the fir
 au BufRead,BufNewFile,BufReadPre *.clj   set filetype=clojure
 NeoBundle 'tpope/vim-fireplace'
 
+"----------------------------------------
+" Golang
+"----------------------------------------
+set rtp+=$GOROOT/misc/vim
+NeoBundleLazy 'Blackrush/vim-gocode', {"autoload": {"filetypes": ['go']}}
+set completeopt=menu,preview
+"golint
+exe "set rtp+=" . globpath($GOPATH, "src/github.com/golang/lint/misc/vim")
+
+
 " git
 NeoBundle "git://git.wincent.com/command-t.git"
 NeoBundle "tpope/vim-fugitive"

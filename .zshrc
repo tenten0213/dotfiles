@@ -5,9 +5,10 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
+
 case ${OSTYPE} in
   darwin*)
-    ZSH_THEME="powerline"
+    ZSH_THEME="solarized-powerline"
     ;;
   linux*)
     ZSH_THEME="gianu"
@@ -29,6 +30,7 @@ bindkey -v
 alias hfon="defaults write com.apple.finder AppleShowAllFiles true|killall Finder"
 # hidden hidden-files
 alias hfoff="defaults write com.apple.finder AppleShowAllFiles false|killall Finder"
+alias tmux='tmux -u'
 
 la='ls -la'
 function cdls() {
@@ -88,13 +90,7 @@ bindkey "^R" history-incremental-search-backward
 bindkey "^S" history-incremental-search-forward
 
 # Customize to your needs...
-export PATH="$HOME/.rbenv/bin:$PATH"
-export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/share/npm/bin:/usr/local/share/python
-eval "$(rbenv init -)"
-
-fpath=(~/.zsh/completion $fpath)
-autoload -U compinit
-compinit -u
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/share/npm/bin:$PATH"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
@@ -102,10 +98,22 @@ export PATH="/usr/local/heroku/bin:$PATH"
 ### virtualenv settings
 export WORKON_HOME="$HOME/.virtualenvs"
 
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+fpath=(~/.zsh/completion $fpath)
+autoload -U compinit
+compinit -u
+
 # added by travis gem
 [ -f /home/tenten0213/.travis/travis.sh ] && source /home/tenten0213/.travis/travis.sh
-PATH="/usr/local/heroku/bin:$PATH"
 [[ -s $HOME/.pythonz/etc/bashrc ]] && source $HOME/.pythonz/etc/bashrc
 source `which virtualenvwrapper.sh`
 export TERM="xterm-256color"
 export PATH=$HOME/.nodebrew/current/bin:$PATH
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/_go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
+export MAVEN2_HOME=/usr/local/Cellar/maven/3.1.1
+export PATH=$PATH:$MAVEN2_HOME/bin:$PATH
