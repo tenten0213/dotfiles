@@ -334,6 +334,8 @@ nnoremap <silent> [unite]u  :<C-u>Unite -no-split buffer file_mru<CR>
 nnoremap <silent> [unite]m  :<C-u>Unite -no-split file_mru<CR>
 " 現在のバッファのカレントディレクトリからファイル一覧
 nnoremap <silent> [unite]d  :<C-u>UniteWithBufferDir -no-split file<CR>
+" tab
+nnoremap <silent> [unite]t  :<C-u>Unite tab<CR>
 
 " unite-rails
 nnoremap <silent> ,urc :<C-u>Unite file_rec/async:app/controllers/ <CR>
