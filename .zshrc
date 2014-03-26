@@ -105,15 +105,21 @@ fpath=(~/.zsh/completion $fpath)
 autoload -U compinit
 compinit -u
 
-# added by travis gem
-[ -f /home/tenten0213/.travis/travis.sh ] && source /home/tenten0213/.travis/travis.sh
-[[ -s $HOME/.pythonz/etc/bashrc ]] && source $HOME/.pythonz/etc/bashrc
-source `which virtualenvwrapper.sh`
-export TERM="xterm-256color"
-export PATH=$HOME/.nodebrew/current/bin:$PATH
-export GOROOT=/usr/local/go
-export GOPATH=$HOME/_go
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
-export MAVEN2_HOME=/usr/local/Cellar/maven/3.1.1
-export PATH=$PATH:$MAVEN2_HOME/bin:$PATH
+case ${OSTYPE} in
+  darwin*)
+    # added by travis gem
+    [ -f /home/tenten0213/.travis/travis.sh ] && source /home/tenten0213/.travis/travis.sh
+    [[ -s $HOME/.pythonz/etc/bashrc ]] && source $HOME/.pythonz/etc/bashrc
+    source `which virtualenvwrapper.sh`
+    export TERM="xterm-256color"
+    export PATH=$HOME/.nodebrew/current/bin:$PATH
+    export GOROOT=/usr/local/go
+    export GOPATH=$HOME/_go
+    export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+    PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
+    export MAVEN2_HOME=/usr/local/Cellar/maven/3.1.1
+    export PATH=$PATH:$MAVEN2_HOME/bin:$PATH
+    export PATH=$PATH:$HOME/.rbenv/versions/2.1.0-preview1/bin/xmpfilter
+    export PATH=$PATH:$HOME/.rbenv/versions/2.1.0-preview1/rubocop
+    ;;
+esac
