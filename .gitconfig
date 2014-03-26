@@ -51,6 +51,7 @@
   rbc = rebase --continue
   rba = rebase --abort
   rbi = rebase -i
+  rbir = rebase -i --root           # first commitもrebaseしたい
   rbi1 = rebase -i HEAD^
   rbi2 = rebase -i HEAD^^
   rbi3 = rebase -i HEAD^^^
