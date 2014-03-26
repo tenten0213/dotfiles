@@ -774,6 +774,9 @@ augroup END
 
 " html
 NeoBundle 'mattn/emmet-vim'
+let g:user_emmet_settings = {
+      \   'lang' : 'ja'
+      \ }
 NeoBundle 'taichouchou2/html5.vim'
 " Haml
 NeoBundle 'tpope/vim-haml'
