@@ -311,6 +311,7 @@ nmap <silent><Leader>ig <Plug>IndentGuidesToggle
 NeoBundle "deton/jasegment.vim"
 " unite
 NeoBundle "Shougo/unite.vim"
+NeoBundle "Shougo/neomru.vim"
 NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'h1mesuke/unite-outline'
 " 入力モードで開始する
@@ -420,13 +421,22 @@ let g:surround_{char2nr("-")} = ":\r"
 " wildfire.vim
 "------------------------------------
 NeoBundle 'gcmt/wildfire.vim'
-" wildfire
+NeoBundle 'nelstrom/vim-textobj-rubyblock.git'
+NeoBundle 'vim-scripts/matchit.zip.git'
+NeoBundle 'kana/vim-textobj-user.git'
+
+runtime macros/matchit.vim
+
 " This selects the next closest text object.
 let g:wildfire_fuel_map = "<ENTER>"
 let g:wildfire_water_map = "<BS>"
 
 " This selects the previous closest text object.
-let g:wildfire_objects = ["i'", 'i"', 'i)', 'i]', 'i}', 'ip', 'it', 'i>']
+let g:wildfire_objects = {
+    \ "*" : ["i'", 'i"', "i)", "i]", "i}"],
+    \ "html,xml,mustache" : ["it", "at"],
+    \ "ruby" : ["ir", "ar"],
+    \ }
 
 " smartchr.vim : ==などの前後を整形
 NeoBundle 'smartchr'
@@ -762,14 +772,15 @@ augroup SwitchSetting
   autocmd Filetype * if !empty(split(&ft, '\.')) | call <SID>define_switch_mappings() | endif
 augroup END
 
+" html
+NeoBundle 'mattn/emmet-vim'
+NeoBundle 'taichouchou2/html5.vim'
 " Haml
 NeoBundle 'tpope/vim-haml'
 " Slim
 NeoBundle 'slim-template/vim-slim'
 " CSS
-NeoBundle 'mattn/zencoding-vim'
 NeoBundle 'hail2u/vim-css3-syntax'
-NeoBundle 'taichouchou2/html5.vim'
 " Less
 NeoBundle 'groenewege/vim-less'
 "scss
