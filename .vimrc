@@ -121,6 +121,13 @@ inoremap <C-l> <Right>
 inoremap <C-b> <BS>
 inoremap <C-d> <DEL>
 
+" insertモードから抜ける
+inoremap <silent> jj <ESC>
+inoremap <silent> <C-j> j
+inoremap <silent> kk <ESC>
+inoremap <silent> <C-k> k
+
+
 "%の移動をtabでも可能に。
 " tab means %
 nnoremap <tab> %
@@ -182,11 +189,11 @@ filetype off
 if has('vim_starting')
   if !isdirectory(expand("~/.vim/bundle/neobundle.vim/"))
     echo "install neobundle..."
-    :call system("git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim")
+    :call system("git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim")
   endif
   set runtimepath+=~/.vim/bundle/neobundle.vim
 endif
-
+let g:neobundle_default_git_protocol='https'
 call neobundle#rc(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
@@ -255,6 +262,8 @@ NeoBundle 'thinca/vim-ref'
 NeoBundle 'rking/ag.vim'
 " 文字コード
 NeoBundle 'banyan/recognize_charcode.vim'
+" emoji
+NeoBundle 'mattn/emoji-vim'
 " multipule
 NeoBundle 'terryma/vim-multiple-cursors' 
 " カラースキーマ
