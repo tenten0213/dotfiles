@@ -264,6 +264,10 @@ NeoBundle 'rking/ag.vim'
 NeoBundle 'banyan/recognize_charcode.vim'
 " emoji
 NeoBundle 'mattn/emoji-vim'
+"LGTM
+NeoBundle 'mattn/lgtm-vim'
+"webapi
+NeoBundle 'mattn/webapi-vim'
 " multipule
 NeoBundle 'terryma/vim-multiple-cursors' 
 " カラースキーマ
