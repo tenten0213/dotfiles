@@ -822,7 +822,7 @@ exe "set rtp+=" . globpath($GOPATH, "src/github.com/golang/lint/misc/vim")
 
 
 " git
-NeoBundle "git://git.wincent.com/command-t.git"
+NeoBundle "wincent/Command-T"
 NeoBundle "tpope/vim-fugitive"
 nnoremap <silent> ,ga :Gwrite<CR>
 nnoremap <silent> ,gc :Gcommit<CR>
