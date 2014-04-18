@@ -105,6 +105,11 @@ fpath=(~/.zsh/completion $fpath)
 autoload -U compinit
 compinit -u
 
+### Added by Golang
+export GOROOT="/usr/local/Cellar/go/1.2.1"
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+
 case ${OSTYPE} in
   darwin*)
     # added by travis gem
