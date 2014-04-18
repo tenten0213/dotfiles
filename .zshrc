@@ -116,10 +116,10 @@ case ${OSTYPE} in
     export GOROOT=/usr/local/go
     export GOPATH=$HOME/_go
     export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-    PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
     export MAVEN2_HOME=/usr/local/Cellar/maven/3.1.1
     export PATH=$PATH:$MAVEN2_HOME/bin:$PATH
     export PATH=$PATH:$HOME/.rbenv/versions/2.1.0-preview1/bin/xmpfilter
     export PATH=$PATH:$HOME/.rbenv/versions/2.1.0-preview1/rubocop
     ;;
 esac
+PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
