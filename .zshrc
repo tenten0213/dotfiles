@@ -30,7 +30,7 @@ bindkey -v
 alias hfon="defaults write com.apple.finder AppleShowAllFiles true|killall Finder"
 # hidden hidden-files
 alias hfoff="defaults write com.apple.finder AppleShowAllFiles false|killall Finder"
-alias tmux='tmux -u'
+alias tmux='TERM=xterm-256color tmux -u'
 
 la='ls -la'
 function cdls() {
