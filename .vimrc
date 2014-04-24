@@ -269,7 +269,7 @@ NeoBundle 'mattn/lgtm-vim'
 "webapi
 NeoBundle 'mattn/webapi-vim'
 " multipule
-NeoBundle 'terryma/vim-multiple-cursors' 
+NeoBundle 'terryma/vim-multiple-cursors'
 " カラースキーマ
 NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'nanotech/jellybeans.vim'
@@ -323,8 +323,8 @@ let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_color_change_percent=20
 let g:indent_guides_guide_size=1
 let g:indent_guides_space_guides=1
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=red
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=green
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=23
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=58
 au FileType coffee,ruby,javascript,python IndentGuidesEnable
 nmap <silent><Leader>ig <Plug>IndentGuidesToggle
 
