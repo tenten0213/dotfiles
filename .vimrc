@@ -401,7 +401,9 @@ map  :call SmoothScroll("d",1, 1)<CR>
 map :call SmoothScroll("u",1, 1)<CR>
 
 " ファイルツリー表示
-NeoBundle "scrooloose/nerdtree"
+NeoBundle 'Shougo/vimfiler'
+":e .で起動
+let g:vimfiler_as_default_explorer = 1
 
 "------------------------------------
 " NERD_commenter.vim
@@ -475,12 +477,6 @@ nnoremap <silent>g<C-p> :<C-u>CtrlPYankRound<CR>
 "}}}
 
 NeoBundle 'kien/ctrlp.vim'
-
-" 自動保存
-NeoBundle 'syui/wauto.vim'
-nmap <Leader>s  <Plug>(AutoWriteStart)
-nmap <Leader>ss <Plug>(AutoWriteStop)
-let g:auto_write = 1
 
 "Calendar
 NeoBundle 'itchyny/calendar.vim'
@@ -611,6 +607,31 @@ aug END
 NeoBundleLazy 'taka84u9/vim-ref-ri', {
       \ 'depends': ['Shougo/unite.vim', 'thinca/vim-ref'],
       \ 'autoload': { 'filetypes': ['ruby','Gemfile','haml','eruby','yaml','slim'] } }
+
+
+"--------------------------------------
+" Python
+"--------------------------------------
+NeoBundleLazy "davidhalter/jedi-vim", {
+      \ "autoload": {
+      \   "filetypes": ["python", "python3", "djangohtml"],
+      \ },
+      \ "build": {
+      \   "mac": "pip install jedi",
+      \   "unix": "pip install jedi",
+      \ }}
+let s:hooks = neobundle#get_hooks("jedi-vim")
+function! s:hooks.on_source(bundle)
+  " jediにvimの設定を任せると'completeopt+=preview'するので
+  " 自動設定機能をOFFにし手動で設定を行う
+  let g:jedi#auto_vim_configuration = 0
+  " 補完の最初の項目が選択された状態だと使いにくいためオフにする
+  let g:jedi#popup_select_first = 0
+  let g:jedi#rename_command = '<Leader>R'
+  let g:jedi#goto_command = '<Leader>G'
+endfunction
+
+
 "----------------------------------------
 " vim-ref
 "----------------------------------------
@@ -832,6 +853,7 @@ exe "set rtp+=" . globpath($GOPATH, "src/github.com/golang/lint/misc/vim")
 " git
 NeoBundle "wincent/Command-T"
 NeoBundle "tpope/vim-fugitive"
+NeoBundle "gregsexton/gitv"
 nnoremap <silent> ,ga :Gwrite<CR>
 nnoremap <silent> ,gc :Gcommit<CR>
 nnoremap <silent> ,gcv :Gcommit-v<CR>
@@ -839,6 +861,8 @@ nnoremap <silent> ,gs :Gstatus<CR>
 nnoremap <silent> ,gd :Gdiff<CR>
 nnoremap <silent> ,gb :Gblame<CR>
 nnoremap <silent> ,gl :Glog<CR>
+nnoremap <silent> ,gv :Gitv<CR>
+nnoremap <silent> ,gva :Gitv --all<CR>
 
 " gitの差分を表示する
 NeoBundle 'airblade/vim-gitgutter'
@@ -895,6 +919,17 @@ elseif has('win64')
 else
   let g:vimproc_dll_path = $HOME . '/.vim/bundle/vimproc/autoload/vimproc_unix.so'
 endif
+
+" ,sh: シェルを起動
+nnoremap <silent> ,sh :VimShell<CR>
+" ,ipy: pythonを非同期で起動
+nnoremap <silent> ,ipy :VimShellInteractive python<CR>
+" ,irb: irbを非同期で起動
+nnoremap <silent> ,pry :VimShellInteractive pry<CR>
+" ,ss: 非同期で開いたインタプリタに現在の行を評価させる
+vmap <silent> ,ss :VimShellSendString<CR>
+" 選択中に,ss: 非同期で開いたインタプリタに選択行を評価させる
+nnoremap <silent> ,ss <S-v>:VimShellSendString<CR>
 
 " RSpecコマンド
 nnoremap <silent> ,rs :RunSpec<CR>
