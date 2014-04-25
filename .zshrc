@@ -89,3 +89,4 @@ autoload -U compinit
 compinit -u
 
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
+source /opt/jubatus/profile
