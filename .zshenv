@@ -42,3 +42,9 @@ case ${OSTYPE} in
     export PATH=$PATH:$HOME/.rbenv/versions/2.1.0-preview1/rubocop
     ;;
 esac
+
+source $HOME/.pythonbrew/etc/bashrc
+export PATH=$PATH:/usr/local/lib/python3.4/site-packages/
+
+# proxyの設定を読み込む
+[ -f ~/.proxy ] && source ~/.proxy
