@@ -285,6 +285,7 @@ NeoBundle 'baskerville/bubblegum'
 syntax enable
 set background=dark
 colorscheme solarized
+let g:solarized_termtrans=1
 " Statusを格好良く表示
 NeoBundle 'bling/vim-airline'
 let g:airline_theme='light'
@@ -383,6 +384,9 @@ au FileType unite inoremap <silent> <buffer> <expr> <C-j> unite#do_action('split
 " ウィンドウを縦に分割して開く
 au FileType unite nnoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
 au FileType unite inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
+" タブで開く
+au FileType unite nnoremap <silent> <buffer> <expr> <C-o> unite#do_action('tabopen')
+au FileType unite inoremap <silent> <buffer> <expr> <C-o> unite#do_action('tabopen')
 
 " ESCキーで終了する
 au FileType unite nmap <silent> <buffer> <ESC> <Plug>(unite_exit)
@@ -620,16 +624,44 @@ NeoBundleLazy "davidhalter/jedi-vim", {
       \   "mac": "pip install jedi",
       \   "unix": "pip install jedi",
       \ }}
-let s:hooks = neobundle#get_hooks("jedi-vim")
-function! s:hooks.on_source(bundle)
-  " jediにvimの設定を任せると'completeopt+=preview'するので
-  " 自動設定機能をOFFにし手動で設定を行う
-  let g:jedi#auto_vim_configuration = 0
-  " 補完の最初の項目が選択された状態だと使いにくいためオフにする
-  let g:jedi#popup_select_first = 0
-  let g:jedi#rename_command = '<Leader>R'
-  let g:jedi#goto_command = '<Leader>G'
+
+function! InitPython()
+  " jedi.vimとpyhoncompleteがバッティングし得るらしいので
+  " http://mattn.kaoriya.net/software/vim/20121018212621.htm
+  let b:did_ftplugin = 1
+
+  setlocal commentstring=#%s
+
+  " rename用のマッピングを無効にしたため、代わりにコマンドを定義
+  command! -nargs=0 JediRename :call jedi#rename()
+
+  setlocal shiftwidth=4
+  setlocal tabstop=8
+  setlocal softtabstop=4
+  setlocal expandtab
+
+  setlocal autoindent
+  setlocal smartindent
+  setlocal cinwords=if,elif,else,for,while,try,except,finally,def,class
+
+  " IndentGuidesEnable
 endfunction
+autocmd FileType python call InitPython()
+
+" pythonのrename用のマッピングがquickrunとかぶるため回避させる
+let g:jedi#rename_command = "<Leader><C-r><C-r>"
+let g:jedi#popup_select_first = 0
+let g:jedi#popup_on_dot = 0
+
+autocmd FileType python setlocal omnifunc=jedi#completions
+
+let g:jedi#auto_vim_configuration = 0
+
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
+
+let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 
 
 "----------------------------------------
@@ -930,6 +962,9 @@ nnoremap <silent> ,pry :VimShellInteractive pry<CR>
 vmap <silent> ,ss :VimShellSendString<CR>
 " 選択中に,ss: 非同期で開いたインタプリタに選択行を評価させる
 nnoremap <silent> ,ss <S-v>:VimShellSendString<CR>
+
+" redraw!
+nnoremap <silent> ,red :redraw!<CR>
 
 " RSpecコマンド
 nnoremap <silent> ,rs :RunSpec<CR>
