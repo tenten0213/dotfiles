@@ -17,6 +17,7 @@ export PATH="/usr/local/heroku/bin:$PATH"
 export WORKON_HOME="$HOME/.virtualenvs"
 
 export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH=$HOME/.rbenv/shims:$PATH
 
 ### Added by Golang
 export GOROOT="/usr/local/Cellar/go/1.2.1"
@@ -43,8 +44,8 @@ case ${OSTYPE} in
     ;;
 esac
 
-source $HOME/.pythonbrew/etc/bashrc
-export PATH=$PATH:/usr/local/lib/python3.4/site-packages/
+#source $HOME/.pythonbrew/etc/bashrc
+#export PATH=$PATH:/usr/local/lib/python3.4/site-packages/
 
 # proxyの設定を読み込む
 [ -f ~/.proxy ] && source ~/.proxy

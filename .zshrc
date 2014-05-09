@@ -1,6 +1,9 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
+alias sudo='sudo '
+alias python=python3
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -9,6 +12,10 @@ ZSH=$HOME/.oh-my-zsh
 case ${OSTYPE} in
   darwin*)
     ZSH_THEME="solarized-powerline"
+    # show hidden-files
+    alias hfon="defaults write com.apple.finder AppleShowAllFiles true|killall Finder"
+    # hidden hidden-files
+    alias hfoff="defaults write com.apple.finder AppleShowAllFiles false|killall Finder"
     ;;
   linux*)
     ZSH_THEME="gianu"
@@ -26,12 +33,6 @@ source "$HOME/.zsh.d/z/z.sh"
 
 bindkey -v
 
-source ~/.pythonbrew/etc/bashrc
-
-# show hidden-files
-alias hfon="defaults write com.apple.finder AppleShowAllFiles true|killall Finder"
-# hidden hidden-files
-alias hfoff="defaults write com.apple.finder AppleShowAllFiles false|killall Finder"
 alias tmux='TERM=xterm-256color tmux -u'
 
 la='ls -la'
@@ -89,4 +90,4 @@ autoload -U compinit
 compinit -u
 
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
-source /opt/jubatus/profile
+#source /opt/jubatus/profile
