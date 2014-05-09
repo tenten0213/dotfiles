@@ -35,6 +35,11 @@ bindkey -v
 
 alias tmux='TERM=xterm-256color tmux -u'
 
+# hub
+function git(){hub "$@"}
+local git==git
+branchname=`${git} symbolic-ref --short HEAD 2> /dev/null`
+
 la='ls -la'
 function cdls() {
     # cdがaliasでループするので\をつける
