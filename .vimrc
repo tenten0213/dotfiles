@@ -616,6 +616,14 @@ NeoBundleLazy 'taka84u9/vim-ref-ri', {
 "--------------------------------------
 " Python
 "--------------------------------------
+
+" syntax check
+" pip install flake8 pyflakes pep8
+"let g:syntastic_python_checkers = ['pyflakes', 'pep8']
+let g:syntastic_python_checkers = ['flake8']
+let g:flake8_ignore = 'E501'
+let g:syntastic_python_flake8_args = '--ignore="E501"'
+
 NeoBundleLazy "davidhalter/jedi-vim", {
       \ "autoload": {
       \   "filetypes": ["python", "python3", "djangohtml"],
@@ -955,7 +963,7 @@ endif
 " ,sh: シェルを起動
 nnoremap <silent> ,sh :VimShell<CR>
 " ,ipy: pythonを非同期で起動
-nnoremap <silent> ,ipy :VimShellInteractive python<CR>
+nnoremap <silent> ,ipy :VimShellInteractive ipython<CR>
 " ,irb: irbを非同期で起動
 nnoremap <silent> ,pry :VimShellInteractive pry<CR>
 " ,ss: 非同期で開いたインタプリタに現在の行を評価させる
