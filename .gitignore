@@ -7,3 +7,4 @@ tags
 *.log
 *.idea
 *.iml
+.DS_STORE
