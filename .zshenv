@@ -24,6 +24,8 @@ export GOROOT="/usr/local/Cellar/go/1.2.1"
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
+### Added by Node.js
+export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 
 case ${OSTYPE} in
@@ -33,7 +35,6 @@ case ${OSTYPE} in
     [[ -s $HOME/.pythonz/etc/bashrc ]] && source $HOME/.pythonz/etc/bashrc
     source `which virtualenvwrapper.sh`
     export TERM="xterm-256color"
-    export PATH=$HOME/.nodebrew/current/bin:$PATH
     export GOROOT=/usr/local/go
     export GOPATH=$HOME/_go
     export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
