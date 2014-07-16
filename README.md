@@ -66,6 +66,12 @@ $ make
 $ sudo make install
 ```
 
+## Vim settings
+
+```
+$ vim ~/.vimrc
+```
+
 ## Ruby settings
 
 ### install require packages
@@ -89,3 +95,33 @@ $ gem install rake
 ```
 
 ## Node.js settings
+
+### install nodebrew
+
+```
+$ wget git.io/nodebrew
+$ perl nodebrew setup
+$ nodebrew ls-remote
+$ nodebrew install-binary v0.11.13
+$ nodebrew use v0.11.13
+```
+
+### proxy settings
+
+```
+$ vim ~/.npmrc
+```
+
+```
+ssl-strict = false
+registry = http://registry.npmjs.org/
+```
+
+## Python settings
+
+```
+$ wget https://bootstrap.pypa.io/ez_setup.py -O - | sudo python
+$ sudo easy_install pip
+$ sudo pip install jedi
+```
+
