@@ -491,6 +491,7 @@ let g:calendar_google_task = 1
 " JavaScript
 "--------------------------------------
 NeoBundle 'JavaScript-syntax'
+NeoBundle 'wookiehangover/jshint.vim'
 NeoBundle 'jiangmiao/simple-javascript-indenter'
 " js BDDツール
 NeoBundle 'claco/jasmine.vim'
@@ -501,6 +502,10 @@ let g:SimpleJsIndenter_CaseIndentLevel = -1
 
 " jshintを使ってチェック
 let g:syntastic_javascript_checker = "jshint"
+let g:syntastic_mode_map = {
+      \ "mode" : "active",
+      \ "active_filetypes" : ["javascript", "json"],
+      \}
 
 
 "--------------------------------------
