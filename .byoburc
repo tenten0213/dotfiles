@@ -1,2 +1,0 @@
-export BYOBU_PREFIX='/usr/local/Cellar/byobu/5.30'
-export BYOBU_BACKEND=tmux
