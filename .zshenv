@@ -27,13 +27,11 @@ export PATH=$PATH:$GOPATH/bin
 ### Added by Node.js
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 
-
 case ${OSTYPE} in
   darwin*)
     # added by travis gem
     [ -f /home/tenten0213/.travis/travis.sh ] && source /home/tenten0213/.travis/travis.sh
     [[ -s $HOME/.pythonz/etc/bashrc ]] && source $HOME/.pythonz/etc/bashrc
-    source `which virtualenvwrapper.sh`
     export TERM="xterm-256color"
     export GOROOT=/usr/local/go
     export GOPATH=$HOME/_go
