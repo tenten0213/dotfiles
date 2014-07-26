@@ -220,6 +220,7 @@ NeoBundleLazy 'Shougo/neosnippet', {
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'rbtnn/vimconsole.vim'
 " quickrunの設定
 nmap <Leader>r <Plug>(quickrun)
 " 横分割をするようにする
