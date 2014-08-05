@@ -220,7 +220,8 @@ NeoBundleLazy 'Shougo/neosnippet', {
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'rbtnn/vimconsole.vim'
+NeoBundle 'vim-jp/vital.vim'
+
 " quickrunの設定
 nmap <Leader>r <Plug>(quickrun)
 " 横分割をするようにする
@@ -267,6 +268,8 @@ NeoBundle 'banyan/recognize_charcode.vim'
 NeoBundle 'mattn/emoji-vim'
 "LGTM
 NeoBundle 'mattn/lgtm-vim'
+"sushiyuki
+NeoBundle 'tenten0213/sushiyuki-vim'
 "webapi
 NeoBundle 'mattn/webapi-vim'
 " multipule
@@ -341,7 +344,7 @@ NeoBundle 'h1mesuke/unite-outline'
 let g:unite_enable_start_insert = 1
 
 nnoremap    [unite]   <Nop>
-nmap    f [unite]
+nmap    m [unite]
 
 " 分割しないでuniteのbufferを表示する
 nnoremap [unite]u  :<C-u>Unite -no-split<Space>
