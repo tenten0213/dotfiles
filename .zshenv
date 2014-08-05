@@ -33,6 +33,8 @@ case ${OSTYPE} in
     [ -f /home/tenten0213/.travis/travis.sh ] && source /home/tenten0213/.travis/travis.sh
     [[ -s $HOME/.pythonz/etc/bashrc ]] && source $HOME/.pythonz/etc/bashrc
     export TERM="xterm-256color"
+    export LANG=ja_JP.UTF-8
+    export LESSCHARSET=utf-8
     export GOROOT=/usr/local/go
     export GOPATH=$HOME/_go
     export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
