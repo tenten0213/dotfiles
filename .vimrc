@@ -127,7 +127,6 @@ inoremap <silent> <C-j> j
 inoremap <silent> kk <ESC>
 inoremap <silent> <C-k> k
 
-
 "%の移動をtabでも可能に。
 " tab means %
 nnoremap <tab> %
@@ -221,6 +220,8 @@ NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/vimshell'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'vim-jp/vital.vim'
+
+NeoBundle 'rhysd/clever-f.vim'
 
 " quickrunの設定
 nmap <Leader>r <Plug>(quickrun)
@@ -335,6 +336,7 @@ nmap <silent><Leader>ig <Plug>IndentGuidesToggle
 
 "日本語の移動に便利なの
 NeoBundle "deton/jasegment.vim"
+
 " unite
 NeoBundle "Shougo/unite.vim"
 NeoBundle "Shougo/neomru.vim"
@@ -965,6 +967,10 @@ elseif has('win32')
   let g:vimproc_dll_path = $HOME . '/.vim/bundle/vimproc/autoload/vimproc_win32.dll'
 elseif has('win64')
   let g:vimproc_dll_path = $HOME . '/.vim/bundle/vimproc/autoload/vimproc_win64.dll'
+elseif has('linux32')
+  let g:vimproc_dll_path = $VIMRUNTIME . '/autoload/vimproc_.linux32.so'
+elseif has('linux64')
+  let g:vimproc_dll_path = $VIMRUNTIME . '/autoload/vimproc_.linux64.so'
 else
   let g:vimproc_dll_path = $HOME . '/.vim/bundle/vimproc/autoload/vimproc_unix.so'
 endif
