@@ -193,8 +193,9 @@ if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim
 endif
 let g:neobundle_default_git_protocol='https'
-call neobundle#rc(expand('~/.vim/bundle/'))
+call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
+call neobundle#end()
 
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
