@@ -27,6 +27,17 @@ export PATH=$PATH:$GOPATH/bin
 ### Added by Node.js
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 
+### Added by Groovy
+export PATH=$PATH:$HOME/.gvm/bin
+[[ -s "$HOME/.gvm/scripts/gvm" ]] && source "$HOME/.gvm/scripts/gvm"
+
+### Added by WildFly
+export JBOSS_HOME=/usr/local/opt/wildfly-as/libexec
+export PATH=${PATH}:${JBOSS_HOME}/bin
+
+### Added by Boot2Dokcer
+export DOCKER_HOST=tcp://localhost:4243
+
 case ${OSTYPE} in
   darwin*)
     # added by travis gem
@@ -38,8 +49,8 @@ case ${OSTYPE} in
     export GOROOT=/usr/local/go
     export GOPATH=$HOME/_go
     export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-    export MAVEN2_HOME=/usr/local/Cellar/maven/3.1.1
-    export PATH=$PATH:$MAVEN2_HOME/bin:$PATH
+    export M2_HOME=/usr/local/apache-maven-3.3.1
+    export PATH=$PATH:$M2_HOME/bin:$PATH
     export PATH=$PATH:$HOME/.rbenv/versions/2.1.0-preview1/bin/xmpfilter
     export PATH=$PATH:$HOME/.rbenv/versions/2.1.0-preview1/rubocop
     ;;
