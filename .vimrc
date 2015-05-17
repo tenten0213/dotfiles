@@ -195,15 +195,17 @@ endif
 let g:neobundle_default_git_protocol='https'
 call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
-call neobundle#end()
 
-NeoBundle 'Shougo/vimproc', {
-      \ 'build' : {
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ }
- 
+NeoBundle 'Shougo/vimproc.vim', {
+\ 'build' : {
+\     'windows' : 'tools\\update-dll-mingw',
+\     'cygwin' : 'make -f make_cygwin.mak',
+\     'mac' : 'make -f make_mac.mak',
+\     'linux' : 'make',
+\     'unix' : 'gmake',
+\    },
+\ }
+
 if has("lua")
   NeoBundleLazy 'Shougo/neocomplete', { 'autoload' : {
         \   'insert' : 1,
@@ -288,10 +290,6 @@ NeoBundle 'vim-scripts/Wombat'
 NeoBundle 'tomasr/molokai'
 NeoBundle 'vim-scripts/rdark'
 NeoBundle 'baskerville/bubblegum'
-syntax enable
-set background=dark
-colorscheme solarized
-let g:solarized_termtrans=1
 " Statusを格好良く表示
 NeoBundle 'bling/vim-airline'
 let g:airline_theme='light'
@@ -972,8 +970,6 @@ elseif has('linux32')
   let g:vimproc_dll_path = $VIMRUNTIME . '/autoload/vimproc_.linux32.so'
 elseif has('linux64')
   let g:vimproc_dll_path = $VIMRUNTIME . '/autoload/vimproc_.linux64.so'
-else
-  let g:vimproc_dll_path = $HOME . '/.vim/bundle/vimproc/autoload/vimproc_unix.so'
 endif
 
 " ,sh: シェルを起動
@@ -1004,3 +1000,9 @@ if(!empty(neobundle#get_not_installed_bundle_names()))
   " vimrc は必ず再読み込み可能な形式で記述すること
   source ~/.vimrc
 end
+call neobundle#end()
+syntax enable
+set background=dark
+colorscheme solarized
+let g:solarized_termtrans=1
+let g:solarized_termcolors=256
