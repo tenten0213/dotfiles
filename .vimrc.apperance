@@ -1,0 +1,40 @@
+"-------------------------------------------------------------------------------
+" 表示 Apperance
+"-------------------------------------------------------------------------------
+set showmatch "対応する括弧のハイライト表示する
+set number "行番号を表示する
+set cursorline " カーソル行をハイライト
+set ruler "ルーラーの表示する
+
+" カレントウィンドウにのみ罫線を引く
+augroup cch
+  autocmd! cch
+  autocmd WinLeave * set nocursorline
+  autocmd WinEnter,BufRead * set cursorline
+augroup END
+
+" 行末の空白文字を可視化
+highlight WhitespaceEOL cterm=underline ctermbg=red guibg=#FF0000
+au BufWinEnter * let w:m1 = matchadd("WhitespaceEOL", ' +$')
+au WinEnter * let w:m1 = matchadd("WhitespaceEOL", ' +$')
+
+" 行頭のTAB文字を可視化
+highlight TabString ctermbg=red guibg=red
+au BufWinEnter * let w:m2 = matchadd("TabString", '^\t+')
+au WinEnter * let w:m2 = matchadd("TabString", '^\t+')
+
+" 全角スペースの表示
+highlight ZenkakuSpace cterm=underline ctermbg=red guibg=#666666
+au BufWinEnter * let w:m3 = matchadd("ZenkakuSpace", '　')
+au WinEnter * let w:m3 = matchadd("ZenkakuSpace", '　')
+
+" 特殊文字(SpecialKey)の見える化。listcharsはlcsでも設定可能。
+set list
+set listchars=tab:>-,trail:-,nbsp:%,extends:>,precedes:<
+
+:hi clear CursorLine
+:hi CursorLine gui=underline
+highlight CursorLine ctermbg=black guibg=black
+
+" コマンド実行中は再描画しない
+set lazyredraw
