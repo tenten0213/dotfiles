@@ -13,9 +13,6 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-### virtualenv settings
-export WORKON_HOME="$HOME/.virtualenvs"
-
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH=$HOME/.rbenv/shims:$PATH
 
@@ -49,15 +46,15 @@ case ${OSTYPE} in
     export GOROOT=/usr/local/go
     export GOPATH=$HOME/_go
     export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+    export PATH=$HOME/.nodebrew/current/bin:$PATH
     export M2_HOME=/usr/local/apache-maven-3.3.1
     export PATH=$PATH:$M2_HOME/bin:$PATH
+    # export MAVEN2_HOME=/usr/local/Cellar/maven/3.1.1
+    # export PATH=$PATH:$MAVEN2_HOME/bin:$PATH
     export PATH=$PATH:$HOME/.rbenv/versions/2.1.0-preview1/bin/xmpfilter
     export PATH=$PATH:$HOME/.rbenv/versions/2.1.0-preview1/rubocop
     ;;
 esac
-
-#source $HOME/.pythonbrew/etc/bashrc
-#export PATH=$PATH:/usr/local/lib/python3.4/site-packages/
 
 # proxyの設定を読み込む
 [ -f ~/.proxy ] && source ~/.proxy

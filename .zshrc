@@ -1,14 +1,7 @@
-# Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
 alias sudo='sudo '
 alias python=python3
-
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-
 case ${OSTYPE} in
   darwin*)
     ZSH_THEME="solarized-powerline"
@@ -62,15 +55,15 @@ setopt hist_ignore_space
 setopt hist_verify
 
 # 余分な空白は詰めて記録
-setopt hist_reduce_blanks  
+setopt hist_reduce_blanks
 
-# 古いコマンドと同じものは無視 
+# 古いコマンドと同じものは無視
 setopt hist_save_no_dups
 
 # historyコマンドは履歴に登録しない
 setopt hist_no_store
 
-# 補完時にヒストリを自動的に展開         
+# 補完時にヒストリを自動的に展開
 setopt hist_expand
 
 # 履歴をインクリメンタルに追加
@@ -89,27 +82,4 @@ fpath=(~/.zsh/completion $fpath)
 autoload -U compinit
 compinit -u
 
-### Added by Golang
-export GOROOT="/usr/local/Cellar/go/1.2.1"
-export GOPATH="$HOME/.go/1.2.1"
-export PATH="$PATH:$GOPATH/bin"
-
-case ${OSTYPE} in
-  darwin*)
-    # added by travis gem
-    [ -f /home/tenten0213/.travis/travis.sh ] && source /home/tenten0213/.travis/travis.sh
-    [[ -s $HOME/.pythonz/etc/bashrc ]] && source $HOME/.pythonz/etc/bashrc
-    source `which virtualenvwrapper.sh`
-    export TERM="xterm-256color"
-    export PATH=$HOME/.nodebrew/current/bin:$PATH
-    export GOROOT=/usr/local/go
-    export GOPATH=$HOME/_go
-    export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-    export MAVEN2_HOME=/usr/local/Cellar/maven/3.1.1
-    export PATH=$PATH:$MAVEN2_HOME/bin:$PATH
-    export PATH=$PATH:$HOME/.rbenv/versions/2.1.0-preview1/bin/xmpfilter
-    export PATH=$PATH:$HOME/.rbenv/versions/2.1.0-preview1/rubocop
-    ;;
-esac
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
-#source /opt/jubatus/profile
