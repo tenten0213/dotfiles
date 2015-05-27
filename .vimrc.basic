@@ -1,0 +1,47 @@
+"-------------------------------------------------------------------------------
+" 基本設定 Basics
+"-------------------------------------------------------------------------------
+set nocompatible " viとの互換をOFF
+set notitle
+set noswapfile " swpファイルを作成しない
+set nobackup "バックアップファイルを作らない設定にする
+set autoread "他で書き換えられたら読み込み直す
+set formatoptions=lmoq " テキスト整形オプション，マルチバイト系を追加
+set hidden " 編集中でも他のファイルを開けるように
+set vb t_vb= " ビープをならさない
+set whichwrap=b,s,h,l,<,>,[,]    " カーソルを行頭、行末で止まらないようにする
+set autoindent "オートインデントする
+set expandtab
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set showcmd " コマンドをステータス行に表示
+set showmode " 現在のモードを表示
+set backspace=indent,eol,start
+set virtualedit+=block " 矩形選択で自由に移動する
+set scrolloff=5
+" Leader キーを設定
+let mapleader = ","
+" 横分割時は下へ､ 縦分割時は右へ新しいウィンドウが開くようにする
+set splitbelow
+set splitright
+" OSのクリップボードを使用する
+set clipboard+=unnamed
+"ヤンクした文字は、システムのクリップボードに入れる
+set clipboard+=autoselect
+
+" ヤンクした値を連続でペーストする設定
+vnoremap <silent> <C-p> "0p<CR>
+" 挿入モードでCtrl+kを押すとクリップボードの内容を貼り付けられるようにする
+imap <C-p>  <ESC>"*pa
+
+" Ev/Rvでvimrcの編集と反映
+command! Ev edit $MYVIMRC
+command! Rv source $MYVIMRC
+
+" ターミナルでマウスを使用できるようにする
+set mouse=a
+set guioptions+=a
+set ttymouse=xterm2
+" ファイルタイプ判定をon
+filetype plugin on

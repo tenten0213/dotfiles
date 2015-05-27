@@ -1,0 +1,388 @@
+"-------------------------------------------------------------------------------
+" プラグインごとの設定 Plugins
+"-------------------------------------------------------------------------------
+
+"------------------------------------
+" unite.vim
+"------------------------------------
+" 入力モードで開始する
+let g:unite_enable_start_insert = 1
+
+nnoremap    [unite]   <Nop>
+nmap    m [unite]
+
+" 分割しないでuniteのbufferを表示する
+nnoremap [unite]u  :<C-u>Unite -no-split<Space>
+
+" 全部乗せ
+nnoremap <silent> [unite]a  :<C-u>UniteWithCurrentDir -no-split -buffer-name=files buffer file_mru bookmark file<CR>
+" ファイル一覧
+nnoremap <silent> [unite]f  :<C-u>Unite -no-split -buffer-name=files file<CR>
+" バッファ一覧
+nnoremap <silent> [unite]j  :<C-u>Unite -no-split buffer<CR>
+" 常用セット
+nnoremap <silent> [unite]u  :<C-u>Unite -no-split buffer file_mru<CR>
+" 最近使用したファイル一覧
+nnoremap <silent> [unite]m  :<C-u>Unite -no-split file_mru<CR>
+" 現在のバッファのカレントディレクトリからファイル一覧
+nnoremap <silent> [unite]d  :<C-u>UniteWithBufferDir -no-split file<CR>
+" tab
+nnoremap <silent> [unite]t  :<C-u>Unite tab<CR>
+
+" ウィンドウを分割して開く
+au FileType unite nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
+au FileType unite inoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
+" ウィンドウを縦に分割して開く
+au FileType unite nnoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
+au FileType unite inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
+" タブで開く
+au FileType unite nnoremap <silent> <buffer> <expr> <C-o> unite#do_action('tabopen')
+au FileType unite inoremap <silent> <buffer> <expr> <C-o> unite#do_action('tabopen')
+
+" ESCキーで終了する
+au FileType unite nmap <silent> <buffer> <ESC> <Plug>(unite_exit)
+" unite.vim上でのキーマッピング
+autocmd FileType unite call s:unite_my_settings()
+function! s:unite_my_settings()
+  " 単語単位からパス単位で削除するように変更
+  imap <buffer> <C-w> <Plug>(unite_delete_backward_path)
+endfunction
+
+"------------------------------------
+" vimfiler
+"------------------------------------
+":e .で起動
+let g:vimfiler_as_default_explorer = 1
+
+"------------------------------------
+" NERD_commenter.vim
+"------------------------------------
+" コメントの間にスペースを空ける
+let NERDSpaceDelims = 1
+"<Leader>xでコメントをトグル(NERD_commenter.vim)
+map <Leader>x, c<space>
+"未対応ファイルタイプのエラーメッセージを表示しない
+let NERDShutUp=1
+
+"------------------------------------
+" quickrun
+"------------------------------------
+nmap <Leader>r <Plug>(quickrun)
+" 横分割をするようにする
+let g:quickrun_config={'*': {'split': 'below'}}
+" CoffeeScriptの設定
+let g:quickrun_config = {}
+let g:quickrun_config['coffee'] = {'command' : 'coffee', 'exec' : ['%c -cbp %s']}
+"RSpec対応
+let g:quickrun_config = {}
+let g:quickrun_config['ruby.rspec'] = {'command': "rspec"}
+let g:quickrun_config['ruby.rspec'] = { 'command': 'rspec', 'cmdopt': 'bundle exec', 'exec': '%o %c %s' }
+
+"------------------------------------
+" neocomplcache
+"------------------------------------
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_max_list = 30
+let g:neocomplcache_auto_completion_start_length = 2
+let g:neocomplcache_enable_smart_case = 1
+" like AutoComplPop
+let g:neocomplcache_enable_auto_select = 1
+" search with camel case like Eclipse
+let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplcache_enable_underbar_completion = 1
+imap <C-k> <Plug>(neocomplcache_snippets_expand)
+smap <C-k> <Plug>(neocomplcache_snippets_expand)
+inoremap <expr><C-g> neocomplcache#undo_completion()
+inoremap <expr><C-l> neocomplcache#complete_common_string()
+
+"------------------------------------
+" neosnippet
+"------------------------------------
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable() <Bar><bar> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable() <Bar><bar> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+"------------------------------------
+" vim-indent-guides
+"------------------------------------
+let g:indent_guides_start_level=1
+let g:indent_guides_auto_colors=0
+let g:indent_guides_enable_on_vim_startup=1
+let g:indent_guides_color_change_percent=20
+let g:indent_guides_guide_size=1
+let g:indent_guides_space_guides=1
+autocmd VimEnter, Colorscheme * :hi IndentGuidesOdd  ctermbg=23
+autocmd VimEnter, Colorscheme * :hi IndentGuidesEven ctermbg=58
+au FileType coffee, ruby, javascript, python IndentGuidesEnable
+nmap <silent><Leader>ig <Plug>IndentGuidesToggle
+
+"------------------------------------
+" Align
+"------------------------------------
+" Alignを日本語環境で使用するための設定
+let g:Align_xstrlen = 3
+
+"------------------------------------
+" endwise.vim
+"------------------------------------
+"{{{
+let g:endwise_no_mappings=1
+"}}}
+
+"------------------------------------
+"" smooth_scroll.vim
+"------------------------------------
+map :call SmoothScroll("d",1, 1)<CR>
+map :call SmoothScroll("u",1, 1)<CR>
+
+"------------------------------------
+" vim-airline.vim
+"------------------------------------
+let g:airline_theme='light'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#branch#enabled = 0
+let g:airline_section_b =
+      \ '%{airline#extensions#branch#get_head()}' .
+      \ '%{""!=airline#extensions#branch#get_head()?("  " . g:airline_left_alt_sep . " "):""}' .
+      \ '%t%( %M%)'
+let g:airline_section_c = ''
+
+
+"------------------------------------
+" surround.vim
+"------------------------------------
+" s, ssで選択範囲を指定文字でくくる
+"nmap s <Plug>Ysurround
+"nmap ss <Plug>Yssurround
+let g:surround_{char2nr('e')} = "begin \r end"
+let g:surround_{char2nr('d')} = "do \r end"
+let g:surround_{char2nr("-")} = ":\r"
+
+"------------------------------------
+" matchit.vim
+"------------------------------------
+runtime macros/matchit.vim
+
+"------------------------------------
+" wildfire.vim
+"------------------------------------
+" This selects the next closest text object.
+let g:wildfire_fuel_map = "<ENTER>"
+let g:wildfire_water_map = "<BS>"
+" This selects the previous closest text object.
+let g:wildfire_objects = {
+    \ "*" : ["i'", 'i"', "i)", "i]", "i}"],
+    \ "html,xml,mustache" : ["it", "at"],
+    \ "ruby" : ["ir", "ar"],
+    \ }
+
+"------------------------------------
+" yankround.vim
+"------------------------------------
+" yankround.vim {{{
+nmap p <Plug>(yankround-p)
+nmap P <Plug>(yankround-P)
+nmap <C-p> <Plug>(yankround-prev)
+nmap <C-n> <Plug>(yankround-next)
+" 履歴取得数
+let g:yankround_max_history = 50
+"履歴一覧(kien/ctrlp.vim)
+nnoremap <silent>g<C-p> :<C-u>CtrlPYankRound<CR>
+"}}}
+
+"------------------------------------
+" jshint
+"------------------------------------
+let g:syntastic_javascript_checker = "jshint"
+let g:syntastic_mode_map = {
+      \ "mode" : "active",
+      \ "active_filetypes" : ["javascript", "json"],
+      \}
+
+" vimにcoffeeファイルタイプを認識させる
+au BufRead,BufNewFile,BufReadPre *.coffee   set filetype=coffee
+" インデントを設定
+autocmd FileType coffee     setlocal sw=2 sts=2 ts=2 et
+
+"------------------------------------
+" vim-rails
+"------------------------------------
+""{{{
+"有効化
+let g:rails_default_file='config/database.yml'
+let g:rails_level = 4
+let g:rails_mappings=1
+let g:rails_modelines=0
+" let g:rails_some_option = 1
+" let g:rails_statusline = 1
+" let g:rails_subversion=0
+" let g:rails_syntax = 1
+" let g:rails_url='http://localhost:3000'
+" let g:rails_ctags_arguments='--languages=-javascript'
+" let g:rails_ctags_arguments = ''
+function! SetUpRailsSetting()
+  nnoremap <buffer><Space>r :R<CR>
+  nnoremap <buffer><Space>a :A<CR>
+  nnoremap <buffer><Space>m :Rmodel<Space>
+  nnoremap <buffer><Space>c :Rcontroller<Space>
+  nnoremap <buffer><Space>v :Rview<Space>
+  nnoremap <buffer><Space>p :Rpreview<CR>
+endfunction
+ 
+aug MyAutoCmd
+  au User Rails call SetUpRailsSetting()
+aug END
+ 
+aug RailsDictSetting
+  au!
+aug END
+"}}}
+
+"--------------------------------------
+" Python
+"--------------------------------------
+" syntax check
+" pip install flake8 pyflakes pep8
+"let g:syntastic_python_checkers = ['pyflakes', 'pep8']
+let g:syntastic_python_checkers = ['flake8']
+let g:flake8_ignore = 'E501'
+let g:syntastic_python_flake8_args = '--ignore="E501"'
+
+function! InitPython()
+  " jedi.vimとpyhoncompleteがバッティングし得るらしいので
+  " http://mattn.kaoriya.net/software/vim/20121018212621.htm
+  let b:did_ftplugin = 1
+
+  setlocal commentstring=#%s
+
+  " rename用のマッピングを無効にしたため、代わりにコマンドを定義
+  command! -nargs=0 JediRename :call jedi#rename()
+
+  setlocal shiftwidth=4
+  setlocal tabstop=8
+  setlocal softtabstop=4
+  setlocal expandtab
+
+  setlocal autoindent
+  setlocal smartindent
+  setlocal cinwords=if,elif,else,for,while,try,except,finally,def,class
+
+  " IndentGuidesEnable
+endfunction
+
+autocmd FileType python call InitPython()
+" pythonのrename用のマッピングがquickrunとかぶるため回避させる
+let g:jedi#rename_command = "<Leader><C-r><C-r>"
+let g:jedi#popup_select_first = 0
+let g:jedi#popup_on_dot = 0
+autocmd FileType python setlocal omnifunc=jedi#completions
+let g:jedi#auto_vim_configuration = 0
+
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
+
+let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+
+"--------------------------------------
+" emmet
+"--------------------------------------
+let g:user_emmet_settings = {
+      \   'lang' : 'ja'
+      \ }
+let g:slimv_swank_clojure = '!osascript -e "tell app \"iTerm\"" -e "tell the first terminal" -e "set mysession to current session" -e "launch session \"Default Session\"" -e "tell the last session" -e "exec command \"/bin/bash\"" -e "write text \"cd $(pwd)\"" -e "write text \"lein swank\"" -e "end tell" -e "select mysession" -e "end tell" -e "end tell"'
+au BufRead,BufNewFile,BufReadPre *.clj   set filetype=clojure
+
+"----------------
+" git
+"----------------
+nnoremap <silent> ,ga :Gwrite<CR>
+nnoremap <silent> ,gc :Gcommit<CR>
+nnoremap <silent> ,gcv :Gcommit-v<CR>
+nnoremap <silent> ,gs :Gstatus<CR>
+nnoremap <silent> ,gd :Gdiff<CR>
+nnoremap <silent> ,gb :Gblame<CR>
+nnoremap <silent> ,gl :Glog<CR>
+nnoremap <silent> ,gv :Gitv<CR>
+nnoremap <silent> ,gva :Gitv --all<CR>
+nnoremap <silent> ,gg :<C-u>GitGutterToggle<CR>
+nnoremap <silent> ,gh :<C-u>GitGutterLineHighlightsToggle<CR>
+
+"----------------------------------------
+" Golang
+"----------------------------------------
+set rtp+=$GOROOT/misc/vim
+set completeopt=menu,preview
+"golint
+exe "set rtp+=" . globpath($GOPATH, "src/github.com/golang/lint/misc/vim")
+
+"----------------------------------------
+" Markdown
+"----------------------------------------
+augroup Vimrc
+  autocmd FileType markdown call <SID>markdown_settings()
+  function! s:markdown_settings()
+    setlocal tabstop=2 shiftwidth=2 softtabstop=2
+
+    " previm
+    "let g:previm_open_cmd = 'open -a Opera'
+    "let g:previm_open_cmd = 'open -a Firefox'
+    "let g:previm_open_cmd = 'open -a Safari'
+    let g:previm_open_cmd = ''
+    nnoremap <buffer> <Space>o :<C-u>PrevimOpen<CR>
+    map <C-j> <Plug>(previm-scroll-down)
+    map <C-k> <Plug>(previm-scroll-up)
+  endfunction
+augroup END
+
+"----------------------------------------
+" jq
+"----------------------------------------
+command! -nargs=? Jq call s:Jq(<f-args>)
+function! s:Jq(...)
+    if 0 == a:0
+        let l:arg = "."
+    else
+        let l:arg = a:1
+    endif
+    execute "%! jq \"" . l:arg . "\""
+endfunction
+
+"----------------------------------------
+" autoload
+"----------------------------------------
+if has('mac')
+  let g:vimproc_dll_path = $VIMRUNTIME . '/autoload/vimproc_mac.so'
+elseif has('win32')
+  let g:vimproc_dll_path = $HOME . '/.vim/bundle/vimproc/autoload/vimproc_win32.dll'
+elseif has('win64')
+  let g:vimproc_dll_path = $HOME . '/.vim/bundle/vimproc/autoload/vimproc_win64.dll'
+elseif has('linux32')
+  let g:vimproc_dll_path = $VIMRUNTIME . '/autoload/vimproc_.linux32.so'
+elseif has('linux64')
+  let g:vimproc_dll_path = $VIMRUNTIME . '/autoload/vimproc_.linux64.so'
+endif
+
+"----------------------------------------
+" RSpec
+"----------------------------------------
+nnoremap <silent> ,rs :RunSpec<CR>
+nnoremap <silent> ,rl :RunSpecLine<CR>
+
+"----------------------------------------
+" Vimshell
+"----------------------------------------
+" ,sh: シェルを起動
+nnoremap <silent> ,sh :VimShell<CR>
+" ,ipy: pythonを非同期で起動
+nnoremap <silent> ,ipy :VimShellInteractive ipython<CR>
+" ,irb: irbを非同期で起動
+nnoremap <silent> ,pry :VimShellInteractive pry<CR>
+" ,ss: 非同期で開いたインタプリタに現在の行を評価させる
+vmap <silent> ,ss :VimShellSendString<CR>
+" 選択中に,ss: 非同期で開いたインタプリタに選択行を評価させる
+nnoremap <silent> ,ss <S-v>:VimShellSendString<CR>
