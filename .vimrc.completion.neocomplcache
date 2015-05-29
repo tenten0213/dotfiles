@@ -43,7 +43,7 @@ let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 " TABで補完できるようにする
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 " undo
-inoremap <expr><C-g>     neocomplcache#undo_completion()
+inoremap <expr><C-g> neocomplcache#undo_completion()
 " 補完候補の共通部分までを補完する
 inoremap <expr><C-s> neocomplcache#complete_common_string()
 " C-kを押すと行末まで削除
@@ -53,7 +53,7 @@ inoremap <expr><C-n>  pumvisible() ? "\<C-n>" : "\<C-x>\<C-u>\<C-p>"
 " C-pでkeyword補完
 inoremap <expr><C-p> pumvisible() ? "\<C-p>" : "\<C-p>\<C-n>"
 " 補完候補が出ていたら確定、なければ改行
-inoremap <expr><CR>  pumvisible() ? neocomplcache#close_popup() : "<CR>"
+" inoremap <expr><CR>  pumvisible() ? neocomplcache#close_popup() : "<CR>"
 
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
