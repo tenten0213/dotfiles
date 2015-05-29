@@ -76,7 +76,9 @@ bindkey "^N" down-line-or-history
 bindkey "^R" history-incremental-search-backward
 bindkey "^S" history-incremental-search-forward
 
-eval "$(rbenv init -)"
+if which rbenv > /dev/null; then
+    eval "$(rbenv init -)"
+fi
 
 fpath=(~/.zsh/completion $fpath)
 autoload -U compinit
